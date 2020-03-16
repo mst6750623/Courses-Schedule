@@ -1,0 +1,104 @@
+body {
+    background-color: #fbfcf3;
+}
+.main-nav {
+    position: fixed;
+    margin-left:0;
+    background-color: #3a3535;
+    height:100%;
+    width:250px;
+    padding:0px;
+    text-align: center;
+    border-right:1px solid black;
+}
+.nav-header {
+
+    padding-top:5px;
+    padding-bottom: 5px;
+    background-color: white;
+    height:100px;
+    width:100%;
+    color: #1d84df;
+    font-weight: bold;
+    font-family: fantasy;
+}
+#logo {
+    max-height: 100%;
+    width:auto;
+}
+
+.nav-main {
+    width:100%;
+    height:100%;
+    font-family:songti;
+    background-color:#343a40;
+}
+
+.nav-main ul {
+    width:100%;
+    padding:0;
+}
+.nav-main li {
+   
+    text-align:left;
+    font-size: large;
+    padding-left:30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color:#ffffff00;
+    transition:all 0.2s ease-in-out;
+}
+.nav-main li:hover {
+    font-weight: bold;
+    background-color:#ffffff27;
+}
+.navbar {
+    padding: 0;
+}
+
+.right-bar{
+    margin-left:250px;
+    height:798px;
+}
+
+#presentation {
+    margin-top:0px;
+}
+
+#title {
+    cursor: pointer;
+    font-size:20px;
+    font-weight:bolder;
+    font-family: fantasy;
+}
+#statics input{
+    font-weight: bold;
+}
+#course-table-area{
+    margin-top:30px;
+    
+}
+#course-body{
+    text-align: left;
+    background-color: white;
+}
+.del_button{
+    cursor: pointer;
+    transition:all 0.3s ease-in-out;
+}
+.del_button:hover{
+    color:red;   
+}
+#submit-btn{
+    margin-top:20px;
+    
+}
+
+#results {
+    display:none; 
+}
+
+#result-table-area td,th{
+    text-align: center;
+    
+}

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/mystyle.css">
+    <title>排课系统</title>
+</head>
+
+<body>
+    <div class="main-nav">
+        <div class="nav-header">
+            <img src="image/logo.jpg" alt="logo" id="logo"> <span>Courses排课系统</span>
+        </div>
+        <div class="nav-main">
+            <nav class="navbar navbar-dark bg-dark">
+                <ul class="navbar-nav nav-pills nav-stacked">
+                    <li class="nav-item mynav" name="statics" >
+                        <a class="nav-link" href="#"><i class="fa fa-calendar-plus-o"></i> 课程数据</a>
+                    </li>
+                    <li class="nav-item mynav" name="results">
+                        <a class="nav-link" href="#"><i class="fa fa-calendar"></i> 排课结果</a>
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
+
+    </div>
+
+    <section class="right-bar">
+        <div class="container" id="presentation">
+            <div id="title" class="row">
+                <div style="height:30px;width:100%;"></div>
+                主页 <span class="text-muted" style="margin-left:5px;">{{title}}</span>
+                <div style="height:40px;width:100%;"></div>
+            </div>
+            <div id="statics" class="main-content pre">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <input type="text" name="course-id" class="form-control" id="course-id" v-model="courseId"
+                            placeholder="课程号" maxlength="10">
+                        <p class="help margin-top-10 text-muted">输入课程号</p>
+                    </div>
+                    <div class="col-lg-6 ">
+                        <input type="text" name="course-name" class="form-control" id="course-name" v-model="courseName"
+                            placeholder="课程名称" maxlength="20">
+                        <p class="help margin-top-10 text-muted">输入课程名称</p>
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <input type="number" name="course-score" class="form-control" id="course-score"
+                            v-model="courseScore" placeholder="课程学分" max="10" min="0">
+                        <p class="help margin-top-10 text-muted">输入课程学分</p>
+                    </div>
+                    <div class="col-lg-4">
+                        <input type="number" name="course-num" class="form-control" id="course-num" v-model="courseNum"
+                            placeholder="每周课程数" max="5" min="0">
+                        <p class="help margin-top-10 text-muted">输入每周课程数</p>
+                    </div>
+                    <div class="col-lg-2">
+                        <input type="button" value="添加课程" class="btn btn-warning" @click="addClass">
+                    </div>
+                </div>
+
+                <div class="row" id="course-table-area">
+                    <div class="col-lg-10">
+                    <table class="table table-hover" >
+                        <thead>
+                            <tr>
+                                <th scope="col">序号</th>
+                                <th scope="col">课号</th>
+                                <th scope="col">课程名</th>
+                                <th scope="col">学分</th>
+                                <th scope="col">每周课程数</th>
+                                <th scope="col">删除</th>
+                            </tr>
+                        </thead>
+                        <tbody id="course-body">
+                          <tr v-for='(course,index) in classData' >
+                              <td scope="row">{{index+1}}</td>
+                              <td>{{course.id}}</td>
+                              <td>{{course.name}}</td>
+                              <td>{{course.score}}</td>
+                              <td>{{course.num}}</td>
+                              <td ><i class="fa fa-remove del_button" v-on:click='remove(index)'></i></td>
+                          </tr>
+                        <tbody>
+                    </table>
+                    </div>
+                </div>
+
+                <div class="row" id="submit-btn">
+                    <div class="col-lg-2 offset-4"><input type="button" class="btn btn-success" value="提交课程信息"></div>
+                    
+                </div>
+            </div>
+           
+
+
+
+
+
+
+            <div id="results" class="main-content pre">
+                <div class="row" id="result-table-area">
+                    <div class="col-lg-10 offset-1">
+                        <table class="table table-bordered" >
+                            <thead>
+                                <tr>
+                                    <th scope="col">时间</th>
+                                    <th scope="col">周一</th>
+                                    <th scope="col">周二</th>
+                                    <th scope="col">周三</th>
+                                    <th scope="col">周四</th>
+                                    <th scope="col">周五</th>
+                                    <th scope="col">周六</th>
+                                    <th scope="col">周日</th>
+                                </tr>
+                            </thead>
+                            <tbody id="course-body">
+                              <tr v-for='(course,index) in middleCourseResult' >
+                                  <th scope="row">第{{index+1}}节课</td>
+                                  <td v-for='detail in course'>{{detail.id}}<br>{{detail.name}}<br>{{detail.score}}</td>
+                                  
+                              </tr>
+                            <tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+
+        
+        
+    </section>
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>
