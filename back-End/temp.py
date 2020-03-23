@@ -8,7 +8,12 @@ import numpy as np
 import pandas as pd
 import random
 import matplotlib.pyplot as plt
+from flask import Flask, jsonify
+from flask import request
+from flask import abort
 
+#由Flask创建socket服务端
+app = Flask(__name__)
 
 #离散程度函数
 def F_discrete(Course_Hour, pop, POP_SIZE, Course_Amount):
@@ -151,87 +156,127 @@ def best(pop, f_fitness, POP_SIZE):
     return [best_individual, best_fitness]
 
 
-#def main():
-#初始化种群
-POP_SIZE = 100 #种群大小
-CHROMO_SIZE = 25 #染色体长度
 
-#导入课程数据
-with pd.ExcelFile(r"E:\同济\大学辅修专业排课建模与算法\experiment1.xlsx") as xls:
-    course_data_df = pd.read_excel(xls,"Sheet2")
-course_data_df = course_data_df.values
-Course_Number = course_data_df[:, 0] #课程编号
-Credit = course_data_df[:, 1] #课程学分
-Course_Hour = course_data_df[:, 2] #课时
-Course_Name = course_data_df[:, 3] #课程名称
-Course_Amount = len(Course_Hour) #课程数量
-#导入每个班级的课程编号
-with pd.ExcelFile(r"E:\同济\大学辅修专业排课建模与算法\experiment1.xlsx") as xls:
-    class1_data_df = pd.read_excel(xls,"class1")
-with pd.ExcelFile(r"E:\同济\大学辅修专业排课建模与算法\experiment1.xlsx") as xls:
-    class2_data_df = pd.read_excel(xls,"class2")
-class1_course_number = class1_data_df.values
-class2_course_number = class2_data_df.values
-Class_Size = 2 #班级数
-class_course_number = np.array([class1_course_number, class2_course_number])
-pop = np.zeros(((POP_SIZE, Course_Amount, CHROMO_SIZE)))
+@app.route('/todo/api/v1.0/tasks', methods=['POST'])
+def main():
+#如果请求里面没有json数据，或者json数据里面title的内容为空
+    if not request.json :
+        abort(400) #返回404错误
+    
+    #result = [(item.get('name', 'NA'), item.get('short', 'NA')) for item in request.json.items]
+    
+    course=request.json['items']
+    class1=request.json['class1']
+    class2=request.json['class2']
+    course_data_df=np.zeros((len(course),4),dtype=object)
+    class1_course_number=np.zeros(len(class1),dtype=object)
+    class2_course_number=np.zeros(len(class2),dtype=object)
+    for i in range(0,len(course)):
+        course_data_df[i,0]=course[i]['number']
+        course_data_df[i,1]=course[i]['credit']
+        course_data_df[i,2]=course[i]['hour']
+        course_data_df[i,3]=course[i]['name']
+        
+    for j in range(0,len(class1)):
+        class1_course_number[j]=class1[j]
+    for k in range(0,len(class2)):
+        class2_course_number[k]=class2[k]
+    print(course_data_df)
+    print(class1_course_number)
+    print(class2_course_number)
+    #course_data_df=np.zeros(request)
+    
+    #def main():
+    #初始化种群
+    POP_SIZE = 100 #种群大小
+    CHROMO_SIZE = 25 #染色体长度
 
-for k in range(0, POP_SIZE):
-    #随机生成课程时间
-    for i in range(0, Course_Amount):
-        success = 0
-        while success == 0:
-            success = 1
-            #在pop数组的当前行、列第三个元素中创建一个长度为25的空数组
-            pop[k, i, :] = np.zeros(25)
-            for l in range(0, Course_Hour[i]):
-                #将n个课时的pop数组第三个元素的位置置为1（但是可能有重复的情况（重复n次取随机数））
-                random_num = random.randint(0,24)
-                pop[k, i, random_num] += 1
-            for ll in range(0, Class_Size):
-                #ll为当前班级（1班或2班）；创建timetable为一个长度为25的空数组
-                timetable = np.zeros(25)
+    #导入课程数据
+   # with pd.ExcelFile(r"E:\同济\大学辅修专业排课建模与算法\experiment1.xlsx") as xls:
+        #course_data_df = pd.read_excel(xls,"Sheet2")
+   # course_data_df = course_data_df.values
+    Course_Number = course_data_df[:, 0] #课程编号
+    Credit = course_data_df[:, 1] #课程学分
+    Course_Hour = course_data_df[:, 2] #课时
+    Course_Name = course_data_df[:, 3] #课程名称
+    Course_Amount = len(Course_Hour) #课程数量
+    #导入每个班级的课程编号
+    #with pd.ExcelFile(r"E:\同济\大学辅修专业排课建模与算法\experiment1.xlsx") as xls:
+       # class1_data_df = pd.read_excel(xls,"class1")
+    #with pd.ExcelFile(r"E:\同济\大学辅修专业排课建模与算法\experiment1.xlsx") as xls:
+        #class2_data_df = pd.read_excel(xls,"class2")
+    #class1_course_number = class1_data_df.values
+    #class2_course_number = class2_data_df.values
+    Class_Size = 2 #班级数
+    class_course_number = np.array([class1_course_number, class2_course_number])
+    pop = np.zeros(((POP_SIZE, Course_Amount, CHROMO_SIZE)))
+
+    for k in range(0, POP_SIZE):
+        #随机生成课程时间
+        for i in range(0, Course_Amount):
+            success = 0
+            while success == 0:
+                success = 1
+                #在pop数组的当前行、列第三个元素中创建一个长度为25的空数组
+                pop[k, i, :] = np.zeros(25)
+                for l in range(0, Course_Hour[i]):
+                    #将n个课时的pop数组第三个元素的位置置为1（但是可能有重复的情况（重复n次取随机数））
+                    random_num = random.randint(0,24)
+                    pop[k, i, random_num] += 1
+                for ll in range(0, Class_Size):
+                    #ll为当前班级（1班或2班）；创建timetable为一个长度为25的空数组
+                    timetable = np.zeros(25)
                 
-                #lll为遍历当前班级（由class表得来）的总课程个数（即共有多少种课）的辅助变量
-                for lll in range(0, len(class_course_number[ll])):
-                    #ii为遍历总课程个数（由sheet2表得来）（即两个班相加共有多少种课）的辅助变量
-                    for ii in range(0, Course_Amount):
-                        #如果遍历sheet2种的课号与当前班级的遍历到的当前课程相等，则timetable等于pop[k,ii]的所有25个元素
-                        if Course_Number[ii] == class_course_number[ll, lll]:
-                            timetable += pop[k,ii]
-                            break
-                success *= np.prod(np.array(timetable<=1).astype(int))
+                    #lll为遍历当前班级（由class表得来）的总课程个数（即共有多少种课）的辅助变量
+                    for lll in range(0, len(class_course_number[ll])):
+                        #ii为遍历总课程个数（由sheet2表得来）（即两个班相加共有多少种课）的辅助变量
+                        for ii in range(0, Course_Amount):
+                        #如果遍历sheet2中的课号与当前班级的遍历到的当前课程相等，则timetable等于pop[k,ii]的所有25个元素
+                            if Course_Number[ii] == class_course_number[ll, lll]:
+                                timetable += pop[k,ii]
+                                break
+                    success *= np.prod(np.array(timetable<=1).astype(int))
    
-f_discrete = F_discrete(Course_Hour, pop, POP_SIZE, Course_Amount) #离散程度
-f_tired = F_tired(Course_Number, pop, POP_SIZE, Course_Amount, class_course_number, Class_Size) #疲劳度
-[k1, k2] = [0.01, 5] #适应度函数中的各函数权重
-f_fitness = k1*f_discrete+k2*f_tired #适应度函数
+    f_discrete = F_discrete(Course_Hour, pop, POP_SIZE, Course_Amount) #离散程度
+    f_tired = F_tired(Course_Number, pop, POP_SIZE, Course_Amount, class_course_number, Class_Size) #疲劳度
+    [k1, k2] = [0.01, 5] #适应度函数中的各函数权重
+    f_fitness = k1*f_discrete+k2*f_tired #适应度函数
 
-#繁殖
-iteration = 1000 #迭代次数
-best_individual = np.zeros(((iteration, Course_Amount, 25)))
-fitness_value = np.zeros(iteration)
-for n in range(0, iteration):
-    print(n)
-    pop = selection(pop, f_fitness, POP_SIZE, Course_Amount, CHROMO_SIZE) #运用锦标赛算法选择新的个体
-    pop = crossover(Course_Number, pop, 0.2, POP_SIZE, Course_Amount, class_course_number, Class_Size) #交叉
-    pop = mutation(Course_Number, Course_Hour, pop, 0.1, POP_SIZE, Course_Amount, class_course_number, Class_Size) #变异
-    f_discrete = F_discrete(Course_Hour, pop, POP_SIZE, Course_Amount)
-    f_tired = F_tired(Course_Number, pop, POP_SIZE, Course_Amount, class_course_number, Class_Size)
-    f_fitness = k1*f_discrete+k2*f_tired
-    [best_individual[n,:], fitness_value[n]] = best(pop, f_fitness, POP_SIZE)
-best_fitness = 10000000
-for i in range(0, iteration):
-    if fitness_value[i] > best_fitness:
-        best_fitness = fitness_value[i]
-        best_individual_number = i
+    #繁殖
+    iteration = 1000 #迭代次数
+    best_individual = np.zeros(((iteration, Course_Amount, 25)))
+    fitness_value = np.zeros(iteration)
+    for n in range(0, iteration):
+        print(n)
+        pop = selection(pop, f_fitness, POP_SIZE, Course_Amount, CHROMO_SIZE) #运用锦标赛算法选择新的个体
+        pop = crossover(Course_Number, pop, 0.2, POP_SIZE, Course_Amount, class_course_number, Class_Size) #交叉
+        pop = mutation(Course_Number, Course_Hour, pop, 0.1, POP_SIZE, Course_Amount, class_course_number, Class_Size) #变异
+        f_discrete = F_discrete(Course_Hour, pop, POP_SIZE, Course_Amount)
+        f_tired = F_tired(Course_Number, pop, POP_SIZE, Course_Amount, class_course_number, Class_Size)
+        f_fitness = k1*f_discrete+k2*f_tired
+        [best_individual[n,:], fitness_value[n]] = best(pop, f_fitness, POP_SIZE)
+    best_fitness = 10000000
+    for i in range(0, iteration):
+        if fitness_value[i] > best_fitness:
+            best_fitness = fitness_value[i]
+            best_individual_number = i
 
-#绘制适应度函数折线图
-x_value = list(range(1, iteration+1))
-y_value = fitness_value
-plt.plot(x_value, y_value) 
+    #绘制适应度函数折线图
+    x_value = list(range(1, iteration+1))
+    y_value = fitness_value
+    plt.plot(x_value, y_value) 
 
-'''
+    '''
 if __name__ == '__main__':
     main()
 '''
+    
+    
+    
+    
+    
+    return "success", 201  #并且返回这个添加的task内容和状态码
+
+
+app.run()
+
