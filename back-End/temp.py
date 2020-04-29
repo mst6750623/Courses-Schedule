@@ -7,10 +7,12 @@
 import numpy as np
 import pandas as pd
 import random
+import json
 import matplotlib.pyplot as plt
 from flask import Flask, jsonify
 from flask import request
 from flask import abort
+
 
 #由Flask创建socket服务端
 app = Flask(__name__)
@@ -155,6 +157,32 @@ def best(pop, f_fitness, POP_SIZE):
     best_individual = pop[best_individual_num,:]
     return [best_individual, best_fitness]
 
+def bestResult(course_data_df, class_course_number, best_result, Class_Size):
+    data1 = []
+    data2 = []
+    #按列遍历best_result,当前列若有不为0的元素，将当前行对应的课程信息（需分别两次判断班级）插入对应班级的json数组中，否则插入0.
+    for col in range(0, 25):
+        find1=0
+        find2=0#标识1班和2班是否当前时间没课
+        for row in range(0, len(best_result)):
+            if best_result[row, col] != 0 :
+                number=course_data_df[row, 0]
+                for classNum in range(0, Class_Size):
+                    for ll in range(0, len(class_course_number[classNum])):
+                        if class_course_number[classNum, ll] == number :#若当前班级有这门课
+                            if classNum == 0 :#是1班
+                                data1.append({"id":number,"name": course_data_df[row, 3],"score":course_data_df[row, 1]})
+                                find1=1
+                            elif classNum == 1 :
+                                data2.append({"id":number,"name": course_data_df[row, 3],"score":course_data_df[row, 1]})
+                                find2=1
+        if find1 == 0 :                    
+            data1.append({"id":"","name":"","score":""})
+        if find2 == 0 :
+            data2.append({"id":"","name":"","score":""})
+            
+    return [data1, data2]
+
 
 
 @app.route('/todo/api/v1.0/tasks', methods=['POST'])
@@ -243,7 +271,8 @@ def main():
     f_fitness = k1*f_discrete+k2*f_tired #适应度函数
 
     #繁殖
-    iteration = 1000 #迭代次数
+    iteration = 100 #迭代次数
+    #创建best_individual为一个1000*课程数*25的空数组
     best_individual = np.zeros(((iteration, Course_Amount, 25)))
     fitness_value = np.zeros(iteration)
     for n in range(0, iteration):
@@ -257,10 +286,17 @@ def main():
         [best_individual[n,:], fitness_value[n]] = best(pop, f_fitness, POP_SIZE)
     best_fitness = 10000000
     for i in range(0, iteration):
-        if fitness_value[i] > best_fitness:
+        if fitness_value[i] < best_fitness:
             best_fitness = fitness_value[i]
             best_individual_number = i
 
+
+    course1=[]
+    course2=[]
+    [course1,course2] = bestResult(course_data_df, class_course_number, best_individual[best_individual_number] , Class_Size)
+    
+    course1_json = json.dumps(course1,ensure_ascii=False)
+    print(course1_json)
     #绘制适应度函数折线图
     x_value = list(range(1, iteration+1))
     y_value = fitness_value
@@ -272,10 +308,10 @@ if __name__ == '__main__':
 '''
     
     
+   
     
     
-    
-    return "success", 201  #并且返回这个添加的task内容和状态码
+    return course1_json, 201  #并且返回这个添加的task内容和状态码
 
 
 app.run()
