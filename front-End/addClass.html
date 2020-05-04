@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Home</title>
+    <link rel="stylesheet" href="assets/styles/style(1).min.css">
+    <link rel="stylesheet" href="css/addClass.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+
+<body>
+
+<div >
+	<form action="" class="frm-single" id="forms">
+		<div class="inside">
+            <div class="title"><strong>添加班级信息</strong></div>
+            
+            <div class="course" v-for='(course,index) in courses'>
+                <input type="checkbox" :value="index+1">
+                <div id="label">{{course.name}}</div>
+                <div id="span">{{course.id}}</div>
+                
+             
+            </div>
+			
+			<input  type="button" class="frm-submit" v-on:click="confirm" id="confirm" value="添加班级">
+			
+			<div class="frm-footer">二手书屋 © 2019.</div>
+			<!-- /.footer -->
+		</div>
+		<!-- .inside -->
+	</form>
+	
+	<!-- /.frm-single -->
+</div><!--/#single-wrapper -->
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+		<script src="assets/script/html5shiv.min.js"></script>
+		<script src="assets/script/respond.min.js"></script>
+	<![endif]-->
+	<!-- 
+	================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="js/jquery-1.9.1.min.js"></script>
+	<script src="js/addClass.js"></script>
+</body>
+</html>

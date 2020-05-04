@@ -1,7 +1,7 @@
 var app= new Vue({
     el:".nav-main",
     data:{
-
+       
     },
     methods:{
         navOn:function($event){
@@ -22,7 +22,7 @@ var pre=new Vue({
         courseScore:"",
         courseNum:"",
         classData:[
-            
+
         ],
         courseResult:[
             {id:"111",name:"高数1",score:"5"},
@@ -120,7 +120,8 @@ var pre=new Vue({
         middleCourseResult:new Array(),
     },
     methods:{
-        addClass:function(){
+        addCourse:function(){
+            console.log(this.classData);
             this.$data.classData.push({id:this.$data.courseId,name:this.$data.courseName,score:this.$data.courseScore,num:this.$data.courseNum});
            
             this.courseId="";
@@ -130,8 +131,39 @@ var pre=new Vue({
         },
         remove:function(index){
             console.log(index);
-            this.classData.splice(index,1);
-        }
+            this.$data.classData.splice(index,1);
+        },
+        submitCourse:function(){
+           
+            console.log(JSON.stringify(this.$data.classData))
+            $.ajax({
+                type: 'POST',
+                url: 'http://127.0.0.1:5000/todo/api/v1.0/tasks',
+                data: JSON.stringify(this.$data.classData),
+                contentType: "application/json", 
+                dataType:"json",
+                success: function(data){
+                    console.log(data)
+                },
+                
+              });
+        },
+        addClass:function(){
+            var login_div = document.createElement('iframe');
+            var login_close = document.createElement('i');
+            var blocker = document.createElement('div');
+            login_div.src = "addClass.html";
+            login_div.classList.add('login', 'new');
+            login_close.classList.add('fa', 'fa-close', 'fa-2x', 'login_close', 'new');
+            blocker.classList.add('box', 'new');
+            var body = document.getElementById('container');
+            body.insertBefore(login_div, body.childNodes[0]);
+            body.insertBefore(login_close, body.childNodes[0]);
+            body.insertBefore(blocker, body.childNodes[0]);
+            $('html,body').css('overflow', 'hidden')
+            $(".login_close").click(login_complete);
+        },
+        
     }
 })
 
@@ -157,8 +189,10 @@ function update(type) {
     console.log(type);
     if(type=="results")
         pre.title=" > 排课结果";
-    else
-         pre.title=" > 输入课程数据";
+    else if(type=="statics")
+        pre.title=" > 输入课程数据";
+    else 
+        pre.title=" > 添加班级信息"
     $(".pre").each(function () {
             if($(this).attr('id')==type)
                 $(this).css('display','inline');
@@ -177,3 +211,10 @@ function resultTOMiddle(){
         pre.middleCourseResult[row][col]=pre.courseResult[i];
     }
 }
+
+function login_complete() {
+    $(".new").remove();
+    $('html,body').css('overflow', '');
+    $('#login').addClass('is_login');
+    $('#notify').hover(function(){createBox();},function(){$('.msg_box').remove();});
+  }

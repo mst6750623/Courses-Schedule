@@ -1,0 +1,21 @@
+.course div {
+    float: right;
+    font-size:12pt;
+}
+
+#span {
+    font-weight: bold;
+    width:80px; 
+    font-size:10pt;
+    
+}
+
+#label {
+    font-weight: bold;
+    width:260px; 
+    
+}
+
+#confirm {
+    margin-top:15px;
+}

@@ -11,7 +11,7 @@
     <title>排课系统</title>
 </head>
 
-<body>
+<body id="container">
     <div class="main-nav">
         <div class="nav-header">
             <img src="image/logo.jpg" alt="logo" id="logo"> <span>Courses排课系统</span>
@@ -21,6 +21,9 @@
                 <ul class="navbar-nav nav-pills nav-stacked">
                     <li class="nav-item mynav" name="statics" >
                         <a class="nav-link" href="#"><i class="fa fa-calendar-plus-o"></i> 课程数据</a>
+                    </li>
+                    <li class="nav-item mynav" name="classInfo" >
+                        <a class="nav-link" href="#"><i class="fa fa-calendar-plus-o"></i> 班级数据</a>
                     </li>
                     <li class="nav-item mynav" name="results">
                         <a class="nav-link" href="#"><i class="fa fa-calendar"></i> 排课结果</a>
@@ -65,7 +68,7 @@
                         <p class="help margin-top-10 text-muted">输入每周课程数</p>
                     </div>
                     <div class="col-lg-2">
-                        <input type="button" value="添加课程" class="btn btn-warning" @click="addClass">
+                        <input type="button" value="添加课程" class="btn btn-warning" @click="addCourse">
                     </div>
                 </div>
 
@@ -89,7 +92,7 @@
                               <td>{{course.name}}</td>
                               <td>{{course.score}}</td>
                               <td>{{course.num}}</td>
-                              <td ><i class="fa fa-remove del_button" v-on:click='remove(index)'></i></td>
+                              <td ><i class="fa fa-remove del_button" @click='remove(index)'></i></td>
                           </tr>
                         <tbody>
                     </table>
@@ -97,11 +100,27 @@
                 </div>
 
                 <div class="row" id="submit-btn">
-                    <div class="col-lg-2 offset-4"><input type="button" class="btn btn-success" value="提交课程信息"></div>
+                    <div class="col-lg-2 offset-4"><input type="button" class="btn btn-success" @click='submitCourse' value="提交课程信息"></div>
                     
                 </div>
             </div>
            
+
+
+
+
+
+            <div id="classInfo" class="main-content pre">
+                <div class="row">
+                    <div class="col col-lg-2 offset-4">
+                        <input type="button" value="添加班级" class="btn btn-warning btn-lg" @click="addClass">
+                    </div>
+                </div>
+            </div>
+
+
+
+
 
 
 
