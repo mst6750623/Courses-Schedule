@@ -19,10 +19,10 @@
         <div class="nav-main">
             <nav class="navbar navbar-dark bg-dark">
                 <ul class="navbar-nav nav-pills nav-stacked">
-                    <li class="nav-item mynav" name="statics" >
+                    <li class="nav-item mynav" name="statics">
                         <a class="nav-link" href="#"><i class="fa fa-calendar-plus-o"></i> 课程数据</a>
                     </li>
-                    <li class="nav-item mynav" name="classInfo" >
+                    <li class="nav-item mynav" name="classInfo">
                         <a class="nav-link" href="#"><i class="fa fa-calendar-plus-o"></i> 班级数据</a>
                     </li>
                     <li class="nav-item mynav" name="results">
@@ -54,7 +54,7 @@
                             placeholder="课程名称" maxlength="20">
                         <p class="help margin-top-10 text-muted">输入课程名称</p>
                     </div>
-                    
+
                 </div>
                 <div class="row">
                     <div class="col-lg-4">
@@ -74,37 +74,38 @@
 
                 <div class="row" id="course-table-area">
                     <div class="col-lg-10">
-                    <table class="table table-hover" >
-                        <thead>
-                            <tr>
-                                <th scope="col">序号</th>
-                                <th scope="col">课号</th>
-                                <th scope="col">课程名</th>
-                                <th scope="col">学分</th>
-                                <th scope="col">每周课程数</th>
-                                <th scope="col">删除</th>
-                            </tr>
-                        </thead>
-                        <tbody id="course-body">
-                          <tr v-for='(course,index) in classData' >
-                              <td scope="row">{{index+1}}</td>
-                              <td>{{course.id}}</td>
-                              <td>{{course.name}}</td>
-                              <td>{{course.score}}</td>
-                              <td>{{course.num}}</td>
-                              <td ><i class="fa fa-remove del_button" @click='remove(index)'></i></td>
-                          </tr>
-                        <tbody>
-                    </table>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">序号</th>
+                                    <th scope="col">课号</th>
+                                    <th scope="col">课程名</th>
+                                    <th scope="col">学分</th>
+                                    <th scope="col">每周课程数</th>
+                                    <th scope="col">删除</th>
+                                </tr>
+                            </thead>
+                            <tbody id="course-body">
+                                <tr v-for='(course,index) in coursesData'>
+                                    <td scope="row">{{index+1}}</td>
+                                    <td>{{course.id}}</td>
+                                    <td>{{course.name}}</td>
+                                    <td>{{course.score}}</td>
+                                    <td>{{course.num}}</td>
+                                    <td><i class="fa fa-remove del_button" @click='remove(index)'></i></td>
+                                </tr>
+                            <tbody>
+                        </table>
                     </div>
                 </div>
 
                 <div class="row" id="submit-btn">
-                    <div class="col-lg-2 offset-4"><input type="button" class="btn btn-success" @click='submitCourse' value="提交课程信息"></div>
-                    
+                    <div class="col-lg-2 offset-4"><input type="button" class="btn btn-success" @click='submitCourse'
+                            value="保存课程信息"></div>
+
                 </div>
             </div>
-           
+
 
 
 
@@ -114,6 +115,11 @@
                 <div class="row">
                     <div class="col col-lg-2 offset-4">
                         <input type="button" value="添加班级" class="btn btn-warning btn-lg" @click="addClass">
+                    </div>
+                </div>
+                <div class="row" v-for='classes in classData'>
+                    <div class="col col-lg-10">
+                        
                     </div>
                 </div>
             </div>
@@ -130,7 +136,7 @@
             <div id="results" class="main-content pre">
                 <div class="row" id="result-table-area">
                     <div class="col-lg-10 offset-1">
-                        <table class="table table-bordered" >
+                        <table class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th scope="col">时间</th>
@@ -144,22 +150,23 @@
                                 </tr>
                             </thead>
                             <tbody id="course-body">
-                              <tr v-for='(course,index) in middleCourseResult' >
-                                  <th scope="row">第{{index+1}}节课</td>
-                                  <td v-for='detail in course'>{{detail.id}}<br>{{detail.name}}<br>{{detail.score}}</td>
-                                  
-                              </tr>
+                                <tr v-for='(course,index) in middleCourseResult'>
+                                    <th scope="row">第{{index+1}}节课</td>
+                                    <td v-for='detail in course'>{{detail.id}}<br>{{detail.name}}<br>{{detail.score}}
+                                    </td>
+
+                                </tr>
                             <tbody>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
-        
 
 
-        
-        
+
+
+
     </section>
     <script src="js/jquery-1.9.1.min.js"></script>
     <script src="js/index.js"></script>

@@ -1,16 +1,19 @@
+.course {
+    margin-top:20px;
+}
 .course div {
     float: right;
     font-size:12pt;
 }
 
-#span {
+.spaner {
     font-weight: bold;
     width:80px; 
     font-size:10pt;
     
 }
 
-#label {
+.labeler {
     font-weight: bold;
     width:260px; 
     

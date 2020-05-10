@@ -17,9 +17,9 @@
             <div class="title"><strong>添加班级信息</strong></div>
             
             <div class="course" v-for='(course,index) in courses'>
-                <input type="checkbox" :value="index+1">
-                <div id="label">{{course.name}}</div>
-                <div id="span">{{course.id}}</div>
+                <input type="checkbox" name="course" v-model="finalCourse" :value="index">
+                <div class="labeler">{{course.name}}</div>
+                <div class="spaner">{{course.id}}</div>
                 
              
             </div>
