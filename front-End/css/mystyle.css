@@ -94,6 +94,8 @@ body {
     
 }
 
+
+/*section2*/
 #classInfo {
     display:none; 
 }
@@ -101,7 +103,41 @@ body {
 #classInfo input{
     font-weight: bold;
 }
+.classes-info {
+    margin-top:15px;
+    border:2px solid black;
+    border-radius: 10px;
+    font-size: 25pt;
+    font-weight: bold;
+    background-color:white;
+}
+.classes-info span{
+    color:rgb(9, 46, 116);
+    position: absolute;
+    left:75%;
+    top:50%;
+    transform: translate(-75%,-50%);
+}
 
+.classes-info p{
+    margin-top:1rem;
+    font-size: medium;
+    font-style: oblique;
+}
+.classes-info .del_button{
+    position: absolute;
+    left:90%;
+    top:50%;
+    transform: translate(-90%,-50%);
+}
+
+
+
+
+
+
+
+/*section3*/
 #results {
     display:none; 
 }
@@ -109,6 +145,19 @@ body {
 #result-table-area td,th{
     text-align: center;
     
+}
+#result-body td{
+    color:purple;
+    font-size: medium;
+}
+#result-body .result-name{
+    font-weight: bolder;
+    font-size:larger;
+    color:black;
+}
+#result-body .result-score{
+    font-weight: lighter;
+    color:black;
 }
 
 

@@ -28,6 +28,9 @@
                     <li class="nav-item mynav" name="results">
                         <a class="nav-link" href="#"><i class="fa fa-calendar"></i> 排课结果</a>
                     </li>
+                    <li  name="submit">
+                        <input type="button" value="开始排课！" class="btn btn-secondary" @click="submitResult">
+                    </li>
 
                 </ul>
             </nav>
@@ -92,7 +95,7 @@
                                     <td>{{course.name}}</td>
                                     <td>{{course.score}}</td>
                                     <td>{{course.num}}</td>
-                                    <td><i class="fa fa-remove del_button" @click='remove(index)'></i></td>
+                                    <td><i class="fa fa-remove del_button" @click='removeCourse(index)'></i></td>
                                 </tr>
                             <tbody>
                         </table>
@@ -100,7 +103,7 @@
                 </div>
 
                 <div class="row" id="submit-btn">
-                    <div class="col-lg-2 offset-4"><input type="button" class="btn btn-success" @click='submitCourse'
+                    <div class="col-lg-2 offset-4"><input type="button" class="btn btn-success" @click='saveCourse'
                             value="保存课程信息"></div>
 
                 </div>
@@ -113,12 +116,17 @@
 
             <div id="classInfo" class="main-content pre">
                 <div class="row">
-                    <div class="col col-lg-2 offset-4">
+                    <div class="col col-lg-2 offset-5">
                         <input type="button" value="添加班级" class="btn btn-warning btn-lg" @click="addClass">
                     </div>
                 </div>
-                <div class="row" v-for='classes in classData'>
-                    <div class="col col-lg-10">
+                <div class="row" >
+                    <div class="col col-lg-10 offset-1 classes-info" v-for='(classes,name,index) in classData'>
+                       <span>班级：{{name}} </span>  
+                            <p v-for='(courses,index) in classes'>
+                                第 {{index+1}}节: {{courses.id}} {{courses.name}}
+                            </p>
+                            <i class="fa fa-remove del_button" @click='removeClass(index)'></i>
                         
                     </div>
                 </div>
@@ -149,10 +157,13 @@
                                     <th scope="col">周日</th>
                                 </tr>
                             </thead>
-                            <tbody id="course-body">
+                            <tbody id="result-body">
                                 <tr v-for='(course,index) in middleCourseResult'>
                                     <th scope="row">第{{index+1}}节课</td>
-                                    <td v-for='detail in course'>{{detail.id}}<br>{{detail.name}}<br>{{detail.score}}
+                                    <td v-for='detail in course'>
+                                        {{detail.id}}
+                                        <br><span class="result-name">{{detail.name}}</span>
+                                        <br><span class="result-score">score:{{detail.score}}</span>
                                     </td>
 
                                 </tr>

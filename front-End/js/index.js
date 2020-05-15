@@ -9,7 +9,38 @@ var app= new Vue({
         },
         navOff:function($event){
             $event.currentTarget.className="nav-item";
-        }
+        },
+        submitResult:function(){
+            var data={
+                item:[],
+                class1:[],
+                class2:[],
+            };
+            data.item=pre.coursesData;
+            var class1=pre.classData.class1;
+            var class2=pre.classData.class2;
+            for(var i=0;i<class1.length;i++)
+            {
+                data.class1.push(class1[i].id);
+            }
+            for(var i=0;i<class2.length;i++)
+            {
+                data.class2.push(class2[i].id);
+            }
+            
+            console.log(JSON.stringify(data));
+             /*$.ajax({
+                type: 'POST',
+                url: 'http://127.0.0.1:5000/todo/api/v1.0/tasks',
+                data: JSON.stringify(this.coursesData),
+                contentType: "application/json", 
+                dataType:"json",
+                success: function(data){
+                    console.log(data)
+                },
+                
+              });*/
+        },
     }
 })
 
@@ -126,51 +157,42 @@ var pre=new Vue({
         middleCourseResult:new Array(),
     },
     methods:{
+        
         addCourse:function(){
-            console.log(this.coursesData);
-            this.$data.coursesData.push({id:this.$data.courseId,name:this.$data.courseName,score:this.$data.courseScore,num:this.$data.courseNum});
-            this.$data.finalCourseId.push(this.$data.courseId);
+            console.log('page1-coursedata',this.coursesData);
+            this.coursesData.push({id:this.courseId,name:this.courseName,score:this.courseScore,num:this.courseNum});
+            this.finalCourseId.push(this.courseId);
             this.courseId="";
             this.courseName="";
             this.courseScore="";
             this.courseNum="";
         },
-        remove:function(index){
-            console.log(index);
-            this.$data.coursesData.splice(index,1);
-            this.$data.finalCourseId.splice(index,1);
+        removeCourse:function(index){
+            //console.log(index);
+            this.coursesData.splice(index,1);
+            this.finalCourseId.splice(index,1);
         },
-        submitCourse:function(){
+        saveCourse:function(){
            
-            console.log(JSON.stringify(this.$data.coursesData))
-            for(var i=0;i<this.$data.coursesData.length;i++)
+            console.log('page1-coursedata2',JSON.stringify(this.coursesData))
+            for(var i=0;i<this.coursesData.length;i++)
             {
-                var a=this.$data.coursesData[i];
+                var a=this.coursesData[i];
                 var id=a.id;
                 var name=a.name;
                 var score=a.score;
                 var num=a.num;
                 var joins=name+'&'+score+'&'+num;
-                console.log(joins);
+                console.log('page1-joins',joins);
                 sessionStorage.setItem(id,joins);
                 console.log( sessionStorage.getItem("dat2") );
             }
             sessionStorage.removeItem("courseids");
-            var courseids=this.$data.finalCourseId.join('-');
-            console.log("courseids",courseids);
+            var courseids=this.finalCourseId.join('-');
+            console.log("page1-courseids",courseids);
             sessionStorage.setItem("courseids",courseids);
             alert("保存信息成功！");
-           /* $.ajax({
-                type: 'POST',
-                url: 'http://127.0.0.1:5000/todo/api/v1.0/tasks',
-                data: JSON.stringify(this.$data.coursesData),
-                contentType: "application/json", 
-                dataType:"json",
-                success: function(data){
-                    console.log(data)
-                },
-                
-              });*/
+           
         },
         addClass:function(){
             var login_div = document.createElement('iframe');
@@ -187,30 +209,50 @@ var pre=new Vue({
             $('html,body').css('overflow', 'hidden')
             $(".login_close").click(login_complete);
         },
+        removeClass:function(index){
+            alert("还在开发中，系统暂不提供此功能哦！")
+        },
         
     },
     created:function(){
         var ids= sessionStorage.getItem("courseids");
-        if(ids != null)
-            ids=ids.split("-");
-        
-        for(var i=0;i<ids.length;i++)
-            {
-                this.$data.finalCourseId.push(ids[i]);
-                var courseInfo=sessionStorage.getItem(ids[i]).split('&');
-                this.$data.coursesData.push({id:ids[i],name:courseInfo[0],score:courseInfo[1],num:courseInfo[2]});
+        console.log("page1-ids",ids);
+        if(ids != '' && ids != null)
+           { 
+                ids=ids.split("-");
+                for(var i=0;i<ids.length;i++)
+                {
+                    this.finalCourseId.push(ids[i]);
+                    var courseInfo=sessionStorage.getItem(ids[i]).split('&');
+                    this.coursesData.push({id:ids[i],name:courseInfo[0],score:courseInfo[1],num:courseInfo[2]});
+                }
             }    
     },
     mounted:function(){
-        if(sessionStorage.getItem("classId") != null)
+        if(sessionStorage.getItem("classId") != '' && sessionStorage.getItem("classId") != null)
         {
             var classes=sessionStorage.getItem("classId").split(',');
             for(var i=0;i<classes.length;i++)
             {
+                var classCoursesTemp = [];
+                var courseList=sessionStorage.getItem(classes[i]);
+                console.log('page2-class',classes[i]);
+                if(courseList != null && courseList != '')
+                {
+                    var courseLists = courseList.split('-');
+                    for(var j=0;j<courseLists.length;j++)
+                    {
+                        var course=sessionStorage.getItem('courseids').split('-')[courseLists[j]];
+                        var courseName=sessionStorage.getItem(course).split('&')[0];
+                        classCoursesTemp.push({id:course,name:courseName});
+                    }
+                }
+                Vue.set(this.classData, classes[i], classCoursesTemp);
+                //console.log(JSON.stringify(this.classData));
                 
-                Vue.set(this.classData, classes[i], []);
-                console.log(JSON.stringify(this.classData))
-                var classUni=this.classData.getItem
+                //console.log(this.classData.getItem('class'));
+                //console.log(this.classData.)
+                //var classUni=this.classData.getItem
                 //this.classData.classes
                 //pre.classData = Object.assign({}, pre.classData, {
                   //  age: 27,
@@ -241,7 +283,7 @@ $(document).ready(function(){
 })
 
 function update(type) {
-    console.log(type);
+    //console.log(type);
     if(type=="results")
         pre.title=" > 排课结果";
     else if(type=="statics")
@@ -257,7 +299,7 @@ function update(type) {
 }
 
 function resultTOMiddle(){
-    console.log("yes");
+    //console.log("yes");
     for(var i=0;i<pre.courseResult.length;i++)
     {
         var row=i%12;
