@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/mystyle.css">
@@ -159,7 +160,7 @@
                             </thead>
                             <tbody id="result-body">
                                 <tr v-for='(course,index) in middleCourseResult'>
-                                    <th scope="row">第{{index+1}}节课</td>
+                                    <th scope="row">第{{(index+1)*2-1}}-{{(index+1)*2}}节课</td>
                                     <td v-for='detail in course'>
                                         {{detail.id}}
                                         <br><span class="result-name">{{detail.name}}</span>
@@ -179,6 +180,7 @@
 
 
     </section>
+    
     <script src="js/jquery-1.9.1.min.js"></script>
     <script src="js/index.js"></script>
 </body>

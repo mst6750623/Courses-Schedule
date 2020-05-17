@@ -9,10 +9,9 @@ import pandas as pd
 import random
 import json
 import matplotlib.pyplot as plt
-from flask import Flask, jsonify, Response
+from flask import Flask, jsonify
 from flask import request
 from flask import abort
-
 
 
 #由Flask创建socket服务端
@@ -201,9 +200,9 @@ def main():
     class1_course_number=np.zeros(len(class1),dtype=object)
     class2_course_number=np.zeros(len(class2),dtype=object)
     for i in range(0,len(course)):
-        course_data_df[i,0]=course[i]['id']
-        course_data_df[i,1]=course[i]['score']
-        course_data_df[i,2]=course[i]['num']
+        course_data_df[i,0]=course[i]['number']
+        course_data_df[i,1]=course[i]['credit']
+        course_data_df[i,2]=course[i]['hour']
         course_data_df[i,3]=course[i]['name']
         
     for j in range(0,len(class1)):
@@ -225,11 +224,10 @@ def main():
         #course_data_df = pd.read_excel(xls,"Sheet2")
    # course_data_df = course_data_df.values
     Course_Number = course_data_df[:, 0] #课程编号
-    Credit =  list(map(float,course_data_df[:, 1])) #课程学分
-    Course_Hour =  list(map(int,course_data_df[:, 2])) #课时
-    Course_Name =  course_data_df[:, 3] #课程名称
+    Credit = course_data_df[:, 1] #课程学分
+    Course_Hour = course_data_df[:, 2] #课时
+    Course_Name = course_data_df[:, 3] #课程名称
     Course_Amount = len(Course_Hour) #课程数量
-    print(Course_Hour);
     #导入每个班级的课程编号
     #with pd.ExcelFile(r"E:\同济\大学辅修专业排课建模与算法\experiment1.xlsx") as xls:
        # class1_data_df = pd.read_excel(xls,"class1")
@@ -273,7 +271,7 @@ def main():
     f_fitness = k1*f_discrete+k2*f_tired #适应度函数
 
     #繁殖
-    iteration = 50 #迭代次数
+    iteration = 100 #迭代次数
     #创建best_individual为一个1000*课程数*25的空数组
     best_individual = np.zeros(((iteration, Course_Amount, 25)))
     fitness_value = np.zeros(iteration)
@@ -313,8 +311,7 @@ if __name__ == '__main__':
    
     
     
-    #return course1_json, 201  #并且返回这个添加的task内容和状态码
-    return Response(course1_json, content_type='application/json')
+    return course1_json, 201  #并且返回这个添加的task内容和状态码
 
 
 app.run()

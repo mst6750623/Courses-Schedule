@@ -35,6 +35,11 @@ var app=new Vue({
                     this.classId.push(classId[i]);
                 }
                 var num=parseInt(classId[classId.length-1].slice(5))+1;
+                if(num > 2)
+                {
+                    alert("暂时只支持两个班级的排课哦！");
+                    return ;
+                }
                 console.log("page2-num",num);
                 var index="class"+num;
                 console.log("page2-index2",index);
@@ -43,6 +48,7 @@ var app=new Vue({
                 sessionStorage.setItem(index,courseInfo);
             }
             //window.parent.reload();
+	        parent.login_complete() ;
         }
 
     },

@@ -12,11 +12,11 @@ var app= new Vue({
         },
         submitResult:function(){
             var data={
-                item:[],
+                items:[],
                 class1:[],
                 class2:[],
             };
-            data.item=pre.coursesData;
+            data.items=pre.coursesData;
             var class1=pre.classData.class1;
             var class2=pre.classData.class2;
             for(var i=0;i<class1.length;i++)
@@ -29,17 +29,48 @@ var app= new Vue({
             }
             
             console.log(JSON.stringify(data));
-             /*$.ajax({
+
+            /*axios( {
+                method: 'post',
+                url: '/todo/api/v1.0/tasks',
+                data: JSON.stringify(data),
+                
+              })
+              .then(function (response) {
+                console.log(response);
+              })
+              .catch(function (error) {
+                console.log(error);
+              });*/
+
+             $.ajax({
                 type: 'POST',
-                url: 'http://127.0.0.1:5000/todo/api/v1.0/tasks',
-                data: JSON.stringify(this.coursesData),
+                url: '/todo/api/v1.0/tasks',
+                data: JSON.stringify(data),
                 contentType: "application/json", 
                 dataType:"json",
                 success: function(data){
-                    console.log(data)
+                    
+                   
+                   // Vue.set(pre.courseResult,data);
+                    pre.courseResult=data;
+                    console.log('data',data);
+                    
+                   /* console.log(JSON.stringify(data[0]));
+                    
+                   for(var i=0;i<data.length;i++)
+                   {
+                       var input=JSON.stringify(data[i])
+                           pre.courseResult.push(input);
+                           pre.courseResult.push(input);              
+                   }*/
+                   console.log('result',pre.courseResult);
+                   resultTOMiddle();
+                   console.log('middle',pre.middleCourseResult);
+                   //console.log(pre.coursesData);
                 },
                 
-              });*/
+              });
         },
     }
 })
@@ -62,7 +93,7 @@ var pre=new Vue({
             
         },
         courseResult:[
-            {id:"111",name:"高数1",score:"5"},
+           /* {id:"111",name:"高数1",score:"5"},
             {id:"111",name:"高数1",score:"5"},
             {id:"222",name:"线代1",score:"3"},
             {id:"222",name:"线代1",score:"3"},
@@ -152,7 +183,7 @@ var pre=new Vue({
             {id:"333",name:"物理",score:"3"},
             {id:"333",name:"物理",score:"3"},
             {id:"333",name:"物理",score:"3"},
-            {id:"",name:"",score:""},
+            {id:"",name:"",score:""},*/
         ],
         middleCourseResult:new Array(),
     },
@@ -266,10 +297,10 @@ var pre=new Vue({
 
 $(document).ready(function(){
     pre.title=" > 输入课程数据";
-    for(var i=0;i<12;i++)
+    for(var i=0;i<5;i++)
     {
         pre.middleCourseResult[i]=new Array();
-        for(var j=0;j<7;j++)
+        for(var j=0;j<5;j++)
         {
             pre.middleCourseResult[i][j]={id:"",name:"",score:""};
         }
@@ -302,14 +333,19 @@ function resultTOMiddle(){
     //console.log("yes");
     for(var i=0;i<pre.courseResult.length;i++)
     {
-        var row=i%12;
-        var col=parseInt(i/12);
+        var row=i%5;
+        var col=parseInt(i/5);
         //console.log(row,col);
         pre.middleCourseResult[row][col]=pre.courseResult[i];
     }
 }
 
 function login_complete() {
-    $(".new").remove();
+    console.log("关闭子页面");
+    $('.new').remove();
     $('html,body').css('overflow', '');
+    location.reload();
+    update("classInfo");
   }
+
+  
