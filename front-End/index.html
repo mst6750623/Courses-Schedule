@@ -7,8 +7,9 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/mystyle.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
     <title>排课系统</title>
 </head>
 
@@ -143,6 +144,20 @@
 
 
             <div id="results" class="main-content pre">
+                <div class="row">
+                    <div class="col-lg-8 offset-4">
+                        <div class="btn-group class-select" data-toggle="buttons">
+                            <label class="btn btn-lg btn-secondary">
+                                <input type="radio" name="classes" class="classes" value="class1" checked> 班级1
+                            </label>
+                            <label class="btn btn-lg btn-secondary">
+                                <input type="radio" name="classes" class="classes" value="class2"> 班级2
+                            </label>
+                            
+                        </div>
+                       
+                    </div>
+                </div>
                 <div class="row" id="result-table-area">
                     <div class="col-lg-10 offset-1">
                         <table class="table table-bordered">
@@ -159,7 +174,7 @@
                                 </tr>
                             </thead>
                             <tbody id="result-body">
-                                <tr v-for='(course,index) in middleCourseResult'>
+                                <tr class="result-subbody" v-show="is_class1" id="class1" v-for='(course,index) in middleCourseResult1'>
                                     <th scope="row">第{{(index+1)*2-1}}-{{(index+1)*2}}节课</td>
                                     <td v-for='detail in course'>
                                         {{detail.id}}
@@ -167,6 +182,15 @@
                                         <br><span class="result-score">score:{{detail.score}}</span>
                                     </td>
 
+                                </tr>
+                                <tr class="result-subbody" v-show="!is_class1" id="class2" v-for='(course,index) in middleCourseResult2'>
+                                    <th scope="row">第{{(index+1)*2-1}}-{{(index+1)*2}}节课</td>
+                                    <td v-for='detail in course'>
+                                        {{detail.id}}
+                                        <br><span class="result-name">{{detail.name}}</span>
+                                        <br><span class="result-score">score:{{detail.score}}</span>
+                                    </td>
+    
                                 </tr>
                             <tbody>
                         </table>

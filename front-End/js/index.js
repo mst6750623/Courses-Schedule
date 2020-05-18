@@ -11,6 +11,7 @@ var app= new Vue({
             $event.currentTarget.className="nav-item";
         },
         submitResult:function(){
+            add_loader();
             var data={
                 items:[],
                 class1:[],
@@ -29,19 +30,8 @@ var app= new Vue({
             }
             
             console.log(JSON.stringify(data));
-
-            /*axios( {
-                method: 'post',
-                url: '/todo/api/v1.0/tasks',
-                data: JSON.stringify(data),
-                
-              })
-              .then(function (response) {
-                console.log(response);
-              })
-              .catch(function (error) {
-                console.log(error);
-              });*/
+            
+            add_loader();
 
              $.ajax({
                 type: 'POST',
@@ -53,22 +43,16 @@ var app= new Vue({
                     
                    
                    // Vue.set(pre.courseResult,data);
-                    pre.courseResult=data;
-                    console.log('data',data);
-                    
-                   /* console.log(JSON.stringify(data[0]));
-                    
-                   for(var i=0;i<data.length;i++)
-                   {
-                       var input=JSON.stringify(data[i])
-                           pre.courseResult.push(input);
-                           pre.courseResult.push(input);              
-                   }*/
-                   console.log('result',pre.courseResult);
-                   resultTOMiddle();
-                   console.log('middle',pre.middleCourseResult);
+                    pre.courseResult1=data.class1;
+                    pre.courseResult2=data.class2;
+                    console.log('data',data);                 
+                    console.log('result',pre.courseResult1,'result2',pre.courseResult2);
+                    resultTOMiddle();
                    //console.log(pre.coursesData);
-                },
+                    remove_loader();
+                },error:function(){
+                    remove_loader();
+                }
                 
               });
         },
@@ -83,6 +67,7 @@ var pre=new Vue({
         courseName:"",
         courseScore:"",
         courseNum:"",
+        is_class1:true,
         coursesData:[
 
         ],
@@ -92,100 +77,14 @@ var pre=new Vue({
         classData:{
             
         },
-        courseResult:[
-           /* {id:"111",name:"高数1",score:"5"},
-            {id:"111",name:"高数1",score:"5"},
-            {id:"222",name:"线代1",score:"3"},
-            {id:"222",name:"线代1",score:"3"},
-            {id:"",name:"",score:""},
-            {id:"",name:"",score:""},
-            {id:"",name:"",score:""},
-            {id:"",name:"",score:""},
-            {id:"333",name:"物理",score:"3"},
-            {id:"333",name:"物理",score:"3"},
-            {id:"333",name:"物理",score:"3"},
-            {id:"",name:"",score:""},
-
-            {id:"",name:"",score:""},
-            {id:"",name:"",score:""},
-            {id:"111",name:"高数1",score:"5"},
-            {id:"111",name:"高数1",score:"5"},
-            {id:"",name:"",score:""},
-            {id:"",name:"",score:""},
-            {id:"444",name:"体育",score:"1"},
-            {id:"444",name:"体育",score:"1"},
-            {id:"111",name:"",score:""},
-            {id:"111",name:"",score:""},
-            {id:"111",name:"",score:""},
-            {id:"111",name:"",score:""},
-
-            {id:"111",name:"高数1",score:"5"},
-            {id:"111",name:"高数1",score:"5"},
-            {id:"222",name:"线代1",score:"3"},
-            {id:"222",name:"线代1",score:"3"},
-            {id:"",name:"",score:""},
-            {id:"",name:"",score:""},
-            {id:"",name:"",score:""},
-            {id:"",name:"",score:""},
-            {id:"333",name:"物理",score:"3"},
-            {id:"333",name:"物理",score:"3"},
-            {id:"333",name:"物理",score:"3"},
-            {id:"",name:"",score:""},
-
-            {id:"111",name:"高数1",score:"5"},
-            {id:"111",name:"高数1",score:"5"},
-            {id:"222",name:"线代1",score:"3"},
-            {id:"222",name:"线代1",score:"3"},
-            {id:"",name:"",score:""},
-            {id:"",name:"",score:""},
-            {id:"",name:"",score:""},
-            {id:"",name:"",score:""},
-            {id:"333",name:"物理",score:"3"},
-            {id:"333",name:"物理",score:"3"},
-            {id:"333",name:"物理",score:"3"},
-            {id:"",name:"",score:""},
-
-
-            {id:"111",name:"高数1",score:"5"},
-            {id:"111",name:"高数1",score:"5"},
-            {id:"222",name:"线代1",score:"3"},
-            {id:"222",name:"线代1",score:"3"},
-            {id:"",name:"",score:""},
-            {id:"",name:"",score:""},
-            {id:"",name:"",score:""},
-            {id:"",name:"",score:""},
-            {id:"333",name:"物理",score:"3"},
-            {id:"333",name:"物理",score:"3"},
-            {id:"333",name:"物理",score:"3"},
-            {id:"",name:"",score:""},
-
-            {id:"111",name:"高数1",score:"5"},
-            {id:"111",name:"高数1",score:"5"},
-            {id:"222",name:"线代1",score:"3"},
-            {id:"222",name:"线代1",score:"3"},
-            {id:"",name:"",score:""},
-            {id:"",name:"",score:""},
-            {id:"",name:"",score:""},
-            {id:"",name:"",score:""},
-            {id:"333",name:"物理",score:"3"},
-            {id:"333",name:"物理",score:"3"},
-            {id:"333",name:"物理",score:"3"},
-            {id:"",name:"",score:""},
-
-            {id:"111",name:"高数1",score:"5"},
-            {id:"111",name:"高数1",score:"5"},
-            {id:"222",name:"线代1",score:"3"},
-            {id:"222",name:"线代1",score:"3"},
-            {id:"",name:"",score:""},
-            {id:"",name:"",score:""},
-            {id:"",name:"",score:""},
-            {id:"",name:"",score:""},
-            {id:"333",name:"物理",score:"3"},
-            {id:"333",name:"物理",score:"3"},
-            {id:"333",name:"物理",score:"3"},
-            {id:"",name:"",score:""},*/
+        courseResult1:[
+           
         ],
-        middleCourseResult:new Array(),
+        courseResult2:[
+           
+        ],
+        middleCourseResult1:new Array(),
+        middleCourseResult2:new Array(),
     },
     methods:{
         
@@ -299,10 +198,12 @@ $(document).ready(function(){
     pre.title=" > 输入课程数据";
     for(var i=0;i<5;i++)
     {
-        pre.middleCourseResult[i]=new Array();
-        for(var j=0;j<5;j++)
+        pre.middleCourseResult1[i]=new Array();
+        pre.middleCourseResult2[i]=new Array();
+        for(var j=0;j<7;j++)
         {
-            pre.middleCourseResult[i][j]={id:"",name:"",score:""};
+            pre.middleCourseResult1[i][j]={id:"",name:"",score:""};
+            pre.middleCourseResult2[i][j]={id:"",name:"",score:""};
         }
     }
     
@@ -310,7 +211,18 @@ $(document).ready(function(){
         update($(this).attr('name'));
         
     });
-    resultTOMiddle();
+    $('.classes').click(function() {
+        if($("input[name='classes']:checked").val() == "class1")
+        {
+            pre.is_class1=true;
+        }
+        else{
+            pre.is_class1=false;
+        }
+       
+        
+    });
+    
 })
 
 function update(type) {
@@ -329,14 +241,21 @@ function update(type) {
     });
 }
 
+
+
 function resultTOMiddle(){
     //console.log("yes");
-    for(var i=0;i<pre.courseResult.length;i++)
+    for(var i=0;i<pre.courseResult1.length;i++)
     {
         var row=i%5;
         var col=parseInt(i/5);
-        //console.log(row,col);
-        pre.middleCourseResult[row][col]=pre.courseResult[i];
+        pre.middleCourseResult1[row][col]=pre.courseResult1[i];
+    }
+    for(var i=0;i<pre.courseResult2.length;i++)
+    {
+        var row=i%5;
+        var col=parseInt(i/5);
+        pre.middleCourseResult2[row][col]=pre.courseResult2[i];
     }
 }
 
@@ -349,3 +268,22 @@ function login_complete() {
   }
 
   
+function add_loader(){
+    var text=document.createElement('span');
+    var spinner = document.createElement('i');
+    var blocker = document.createElement('div');
+    text.innerText='排课计算中，请稍后';
+    text.classList.add('new1');
+    spinner.classList.add('fa', 'fa-spinner', 'fa-5x', 'fa-spin', 'new1');
+    blocker.classList.add('box', 'new1');
+    var body = document.getElementById('container');
+    body.insertBefore(text, body.childNodes[0]);
+    body.insertBefore(spinner, body.childNodes[0]);
+    body.insertBefore(blocker, body.childNodes[0]);
+    $('html,body').css('overflow', 'hidden')
+    
+}  
+function remove_loader(){
+    $('.new1').remove();
+    $('html,body').css('overflow', '');
+}
