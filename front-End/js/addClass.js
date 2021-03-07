@@ -23,7 +23,7 @@ var app=new Vue({
             {
                 var index="class1";
                 console.log("page2-index1",index);
-                this.$data.classId.push(index);
+                this.classId.push(index);
                 sessionStorage.setItem("classId",this.classId);
                 sessionStorage.setItem(index,courseInfo);
             }

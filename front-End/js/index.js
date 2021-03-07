@@ -133,15 +133,37 @@ var pre=new Vue({
             login_close.classList.add('fa', 'fa-close', 'fa-2x', 'login_close', 'new');
             blocker.classList.add('box', 'new');
             var body = document.getElementById('container');
-            body.insertBefore(login_div, body.childNodes[0]);
             body.insertBefore(login_close, body.childNodes[0]);
+            body.insertBefore(login_div, body.childNodes[0]);
             body.insertBefore(blocker, body.childNodes[0]);
             $('html,body').css('overflow', 'hidden')
             $(".login_close").click(login_complete);
         },
         removeClass:function(index){
-            alert("还在开发中，系统暂不提供此功能哦！")
+            var classes=sessionStorage.getItem("classId").split(',');
+            index++;
+            for(var i=0;i<classes.length;i++)
+            {
+                var className = "class"+index;
+                console.log(className, classes[i]);
+                if(classes[i] == className){ 
+                    classes.splice(i,1);
+                    //this.classData.splice(i, 1);
+                    delete this.classData.className;
+                    console.log(this.classData);
+                    sessionStorage.removeItem(className);
+                }
+            }
+            var classid = classes.join(',');
+            if(classes.length == 0)
+                sessionStorage.removeItem("classId");
+            else    
+                sessionStorage.setItem("classId", classid);
+            location.reload();
         },
+        upload:function(){
+
+        }
         
     },
     created:function(){
@@ -226,13 +248,16 @@ $(document).ready(function(){
 })
 
 function update(type) {
-    //console.log(type);
+    console.log(type);
     if(type=="results")
         pre.title=" > 排课结果";
     else if(type=="statics")
         pre.title=" > 输入课程数据";
-    else 
-        pre.title=" > 添加班级信息"
+    else if(type=="filesInfo")
+        pre.title=" > 文件上传与下载";
+    else    
+        pre.title=" > 添加班级信息";
+    console.log(pre.title);
     $(".pre").each(function () {
             if($(this).attr('id')==type)
                 $(this).css('display','inline');
