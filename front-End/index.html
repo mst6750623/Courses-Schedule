@@ -10,21 +10,21 @@
     <link rel="stylesheet" href="css/mystyle.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- Dropify -->
-	<link rel="stylesheet" href="assets/plugin/dropify/css/dropify.min.css">
+    <link rel="stylesheet" href="assets/plugin/dropify/css/dropify.min.css">
 
     <title>排课系统</title>
 </head>
 
 <body id="container">
     <div class="nav-header">
-        <div class = "logo-img"> 
+        <div class="logo-img">
             <img src="image/logo2.jpg" alt="logo" id="logo">
         </div>
-        <span class = "title">Courses 排课系统</span> 
-        <div class = "user"> 您好! <span>用户User</span> </div>  
+        <span class="title">Courses 排课系统</span>
+        <div class="user"> 您好! <span>用户User</span> </div>
     </div>
     <div class="main-nav">
-       
+
         <div class="nav-main">
             <nav class="navbar navbar-dark bg-dark">
                 <ul class="navbar-nav nav-pills nav-stacked">
@@ -41,7 +41,7 @@
                         <a class="nav-link" href="#"><i class="fa fa-calendar"></i> 排课结果</a>
                     </li>
 
-                    <li  name="submit">
+                    <li name="submit">
                         <input type="button" value="开始排课！" class="btn btn-secondary" @click="submitResult">
                     </li>
 
@@ -133,48 +133,54 @@
                         <input type="button" value="添加班级" class="btn btn-info btn-lg" @click="addClass">
                     </div>
                 </div>
-                <div class="row" >
+                <div class="row">
                     <div class="col col-lg-10 offset-1 classes-info" v-for='(classes,name,index) in classData'>
-                       <span>班级：{{name}} </span>  
-                            <p v-for='(courses,index) in classes'>
-                                第 {{index+1}}节: {{courses.id}} {{courses.name}}
-                            </p>
-                            <i class="fa fa-remove del_button" @click='removeClass(index)'></i>
-                        
+                        <span>班级：{{name}} </span>
+                        <p v-for='(courses,index) in classes'>
+                            第 {{index+1}}节: {{courses.id}} {{courses.name}}
+                        </p>
+                        <i class="fa fa-remove del_button" @click='removeClass(index)'></i>
+
                     </div>
                 </div>
             </div>
 
 
 
-            <div id = "filesInfo" class = "main-content pre">
-                <div class = "row">
+            <div id="filesInfo" class="main-content pre">
+                <div class="row">
                     <div class="col col-lg-3 offset-3">
                         <button class="btn btn-info "><a href="excel/专业代号.xlsx">下载专业代号模板</span></a></button>
                     </div>
                     <div class="col col-lg-3 ">
                         <button class="btn btn-info "><a href="excel/第一.二学期工作安排表.xlsx">下载工作安排表模板</span></a></button>
-                        
+
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col col-lg-12">
-                        <div class="box-content">
-                            <h5 class="box-title">上传专业代号</h5>
-                            <!-- /.box-title -->
-                            <!-- /.dropdown js__dropdown -->
-                            <input type="file" class="dropify" name="music_file" accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                                data-allowed-formats="portrait square" data-max-file-size="1M" required="required" />
-                        </div>
+                        <form action="" id="form">
+                            <div class="box-content">
+                                <h5 class="box-title">上传专业代号</h5>
+                                <!-- /.box-title -->
+                                <!-- /.dropdown js__dropdown -->
+                                <input type="file" class="dropify" name="major_file" id="major_file"
+                                    accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                                    data-allowed-formats="portrait square" data-max-file-size="1M"
+                                    required="required" />
+                            </div>
 
-                        <div class="box-content">
-                            <h5 class="box-title">上传工作安排表</h5>
-                            <!-- /.box-title -->
-                            <!-- /.dropdown js__dropdown -->
-                            <input type="file" class="dropify" name="music_file" accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                                data-allowed-formats="portrait square" data-max-file-size="1M" required="required" />
-                        </div>
+                            <div class="box-content">
+                                <h5 class="box-title">上传工作安排表</h5>
+                                <!-- /.box-title -->
+                                <!-- /.dropdown js__dropdown -->
+                                <input type="file" class="dropify" name="job_file" id = "job_file"
+                                    accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                                    data-allowed-formats="portrait square" data-max-file-size="1M"
+                                    required="required" />
+                            </div>
+                        </form>
                     </div>
                     <div class="col col-lg-2 offset-5">
                         <input type="button" value="上传" id="upload" class="btn btn-success" @click="upload">
@@ -197,9 +203,9 @@
                             <label class="btn btn-lg btn-secondary">
                                 <input type="radio" name="classes" class="classes" value="class2"> 班级2
                             </label>
-                            
+
                         </div>
-                       
+
                     </div>
                 </div>
                 <div class="row" id="result-table-area">
@@ -218,7 +224,8 @@
                                 </tr>
                             </thead>
                             <tbody id="result-body">
-                                <tr class="result-subbody" v-show="is_class1" id="class1" v-for='(course,index) in middleCourseResult1'>
+                                <tr class="result-subbody" v-show="is_class1" id="class1"
+                                    v-for='(course,index) in middleCourseResult1'>
                                     <th scope="row">第{{(index+1)*2-1}}-{{(index+1)*2}}节课</td>
                                     <td v-for='detail in course'>
                                         {{detail.id}}
@@ -227,14 +234,15 @@
                                     </td>
 
                                 </tr>
-                                <tr class="result-subbody" v-show="!is_class1" id="class2" v-for='(course,index) in middleCourseResult2'>
+                                <tr class="result-subbody" v-show="!is_class1" id="class2"
+                                    v-for='(course,index) in middleCourseResult2'>
                                     <th scope="row">第{{(index+1)*2-1}}-{{(index+1)*2}}节课</td>
                                     <td v-for='detail in course'>
                                         {{detail.id}}
                                         <br><span class="result-name">{{detail.name}}</span>
                                         <br><span class="result-score">score:{{detail.score}}</span>
                                     </td>
-    
+
                                 </tr>
                             <tbody>
                         </table>
@@ -248,16 +256,17 @@
 
 
     </section>
-    
+
     <script src="js/jquery-1.9.1.min.js"></script>
     <script src="js/index.js"></script>
-    
-	<script src="assets/scripts/modernizr.min.js"></script>
-	
+    <script src="js/Upload.js"></script>
 
-	<!-- Dropify -->
-	<script src="assets/plugin/dropify/js/dropify.min.js"></script>
-	<script src="assets/scripts/fileUpload.demo.min.js"></script>
+    <script src="assets/scripts/modernizr.min.js"></script>
+
+
+    <!-- Dropify -->
+    <script src="assets/plugin/dropify/js/dropify.min.js"></script>
+    <script src="assets/scripts/fileUpload.demo.min.js"></script>
 
 </body>
 
