@@ -26,7 +26,7 @@ var pre = new Vue({
         middleCourseResult2: new Array(),
     },
     methods: {
-
+       
         addCourse: function () {
             console.log('page1-coursedata', this.coursesData);
             this.coursesData.push({
@@ -192,7 +192,7 @@ var pre = new Vue({
 })
 
 $(document).ready(function () {
-    pre.title = " > 输入课程数据";
+    pre.title = "";
     for (var i = 0; i < 5; i++) {
         pre.middleCourseResult1[i] = new Array();
         pre.middleCourseResult2[i] = new Array();
@@ -226,17 +226,31 @@ $(document).ready(function () {
 
 })
 
+function backToMain(){
+    //if it is in homepage now
+    if($("#homePage").css('display') != "none")
+        return;
+    update("homePage");
+    if($("#title").css('display') != "none")
+        $("#title").toggle(100,'swing');
+}
+
 function update(type) {
     console.log(type);
+    if($("#title").css('display') == "none")
+        $("#title").toggle(100,'swing');
     if (type == "results")
         pre.title = " > 排课结果";
     else if (type == "statics")
         pre.title = " > 输入课程数据";
     else if (type == "filesInfo")
         pre.title = " > 文件上传与下载";
-    else
+    else if (type == "classInfo")
         pre.title = " > 添加班级信息";
-    console.log(pre.title);
+    else if (type == "homePage")
+        ;    
+    else 
+        alert("error in update!");    
     $(".pre").each(function () {
         if ($(this).attr('id') == type)
             $(this).css('display', 'inline');
@@ -252,4 +266,19 @@ function login_complete() {
     $('html,body').css('overflow', '');
     location.reload();
     update("classInfo");
+}
+
+function toggleMain(event, type){
+    var id;
+    if($(event).hasClass("fa-caret-down"))
+        $(event).removeClass("fa-caret-down").addClass("fa-caret-left");
+    else    
+        $(event).removeClass("fa-caret-left").addClass("fa-caret-down");
+    if(type == "manual"){
+        id = "#manual-main";
+    }
+    else{
+        id = "#auto-main";
+    }
+    $(id).toggle(100,'swing');
 }

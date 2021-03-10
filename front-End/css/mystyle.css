@@ -4,6 +4,7 @@ body {
 
 .main-nav {
     position: fixed;
+    z-index: 100;
     margin-top: 100px;
     margin-left: 0;
     background-color: #3a3535;
@@ -16,6 +17,7 @@ body {
 
 .nav-header {
     position: fixed;
+    overflow: hidden;
     background-color: white;
     height: 100px;
     width: 100%;
@@ -33,16 +35,19 @@ body {
 #logo {
     max-height: 100%;
     width: auto;
+    cursor: pointer;
 }
 
 .nav-header .title {
+    position: absolute;
     float: left;
     margin-left: 40px;
-    color: #4298e4;
+    color: #000000;
     font-weight: bold;
     font-size: 24pt;
-    font-family: STXinwei;
+    /*font-family: STXinwei;*/
     line-height: 90px;
+    min-width: 100px;
 }
 
 .nav-header .user {
@@ -60,7 +65,7 @@ body {
 
 .nav-main {
     width: 100%;
-    height: 100%;
+    height: 120%;
     font-family: songti;
     background-color: #343a40;
 }
@@ -77,22 +82,39 @@ body {
     padding-top: 10px;
     padding-bottom: 10px;
     background-color: #ffffff00;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.1s ease-in-out;
 }
 
-.nav-main li:hover {
+
+
+/*
+.mynav {
+    text-align: left;
+    font-size: large;
+    padding-left: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #ffffff00;
+    
+}*/
+
+.nav-link:hover {
     font-weight: bold;
-    background-color: #ffffff27;
+    color:white;
 }
 
 .navbar {
     padding: 0;
 }
 
+.sub-nav{
+    list-style: none;
+}
+
 .right-bar {
     padding-top: 110px;
     margin-left: 250px;
-    height: 798px;
+    /*height: 798px;*/
 }
 
 
@@ -106,6 +128,75 @@ body {
     font-size: 20px;
     font-weight: bolder;
     font-family: fantasy;
+    display: none;
+}
+
+
+
+#homePage h1{
+    font-weight: bolder;
+    font-size:45pt;
+    margin-left:auto;
+    margin-right: auto;
+}
+
+#homePage .mini-header{
+    font-size:18pt;
+    color:#53575c;
+}
+#homePage .home-title {
+    margin-top:35px;
+    font-size: 15pt;
+}
+#homePage .home-main{
+    margin-top:60px;
+}
+
+#homePage .home-main h2{
+    font-weight: bold ;
+}
+#homePage .home-main .fa{
+    cursor: pointer;
+    transition: all 0.1s;
+}
+#homePage .home-main .fa:hover{
+    transform: scale(1.1,1.1);
+}
+
+#homePage .home-main .my-li{
+    margin-top:10px;
+    font-weight: 400;
+    color:#575757;
+}
+
+#homePage .my-card{
+    border-right:2px solid #000000;
+    background-color: #ffffff00;
+   
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+#homePage .home-bottom{
+    position: absolute;
+    left:50%;
+    transform: translate(-50%,0);
+    bottom:30px;
+    
+}
+
+#homePage .home-bottom a:hover{
+    color:#747474;
+}
+
+
+
+
+
+
+/*section1*/
+#statics {
+    display: none;
 }
 
 #statics input {
@@ -135,7 +226,7 @@ body {
     margin-top: 20px;
 
 }
-
+/*end of section1*/
 
 /*section2*/
 #classInfo {

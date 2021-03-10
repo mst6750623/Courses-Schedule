@@ -1,7 +1,7 @@
 var app = new Vue({
     el: ".nav-main",
     data: {
-
+        manualSchedule : false,
     },
     methods: {
         navOn: function ($event) {
@@ -9,6 +9,13 @@ var app = new Vue({
         },
         navOff: function ($event) {
             $event.currentTarget.className = "nav-item";
+        },
+        manualToggle: function(){
+            //this.manualSchedule = ! this.manualSchedule;
+            $("#manual-schedule").toggle(200,"swing");
+        },
+        autoToggle: function(){
+            $("#auto-schedule").toggle(200,"swing");
         },
         submitResult: function () {
             add_loader();
