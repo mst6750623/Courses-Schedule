@@ -38,8 +38,12 @@
                             <li class="nav-item mynav" name="classInfo">
                                 <a class="nav-link" href="#"><i class="fa fa-calendar-plus-o"></i> 班级数据</a>
                             </li>
-                            <li class="nav-item mynav" name="results">
+                            <li class="nav-item mynav" name="manualResults">
                                 <a class="nav-link" href="#"><i class="fa fa-database"></i> 排课结果</a>
+                            </li>
+                            <li name="submit">
+                                <a class="nav-link" href="#" @click="submitManualResult"><i class="fa fa-operate"></i>
+                                    开始手动排课</a>
                             </li>
                         </ul>
 
@@ -53,15 +57,17 @@
                             <li class="nav-item mynav" name="filesInfo">
                                 <a class="nav-link" href="#"><i class="fa fa-file-o"></i> 文件下载与上传</a>
                             </li>
-
+                            <li class="nav-item mynav" name="autoResults">
+                                <a class="nav-link" href="#"><i class="fa fa-database"></i> 排课结果</a>
+                            </li>
+                            <li name="submit">
+                                <a class="nav-link" href="#" @click="submitAutoResult"><i class="fa fa-operate"></i>
+                                    开始自动排课</a>
+                            </li>
                         </ul>
 
                     </li>
 
-
-                    <li name="submit">
-                        <input type="button" value="开始排课！" class="btn btn-secondary" @click="submitResult">
-                    </li>
 
                 </ul>
             </nav>
@@ -71,12 +77,6 @@
 
     <section class="right-bar">
         <div class="container" id="presentation">
-            <div id="title" class="row">
-                <div style="height:30px;width:100%;"></div>
-                <span id="main-page-btn" onclick="backToMain()">主页</span>
-                <span class="text-muted" style="margin-left:5px;">{{title}}</span>
-                <div style="height:40px;width:100%;"></div>
-            </div>
 
 
             <div id="homePage" class="main-content pre">
@@ -152,198 +152,250 @@
                 </div>
             </div>
 
-
-            <div id="statics" class="main-content pre">
-                <div class="row">
-                    <div class="col-lg-4 col-md-4">
-                        <input type="text" name="course-id" class="form-control" id="course-id" v-model="courseId"
-                            placeholder="课程号" maxlength="10">
-                        <p class="help margin-top-10 text-muted">输入课程号</p>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <input type="text" name="course-name" class="form-control" id="course-name" v-model="courseName"
-                            placeholder="课程名称" maxlength="20">
-                        <p class="help margin-top-10 text-muted">输入课程名称</p>
-                    </div>
-
-                </div>
-                <div class="row">
-                    <div class="col-lg-4 col-md-4">
-                        <input type="number" name="course-score" class="form-control" id="course-score"
-                            v-model="courseScore" placeholder="课程学分" max="10" min="0">
-                        <p class="help margin-top-10 text-muted">输入课程学分</p>
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                        <input type="number" name="course-num" class="form-control" id="course-num" v-model="courseNum"
-                            placeholder="每周课程数" max="5" min="0">
-                        <p class="help margin-top-10 text-muted">输入每周课程数</p>
-                    </div>
-                    <div class="col-lg-2 col-md-2">
-                        <input type="button" value="添加课程" class="btn btn-info" @click="addCourse">
-                    </div>
+            <div id="manualMode">
+                <div id="title" class="row">
+                    <div style="height:30px;width:100%;"></div>
+                    <span id="main-page-btn" onclick="backToMain()">主页</span>
+                    <span class="text-muted" style="margin-left:5px;">{{title}}</span>
+                    <div style="height:40px;width:100%;"></div>
                 </div>
 
-                <div class="row" id="course-table-area">
-                    <div class="col-lg-10 col-md-10">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col">序号</th>
-                                    <th scope="col">课号</th>
-                                    <th scope="col">课程名</th>
-                                    <th scope="col">学分</th>
-                                    <th scope="col">每周课程数</th>
-                                    <th scope="col">删除</th>
-                                </tr>
-                            </thead>
-                            <tbody id="course-body">
-                                <tr v-for='(course,index) in coursesData'>
-                                    <td scope="row">{{index+1}}</td>
-                                    <td>{{course.id}}</td>
-                                    <td>{{course.name}}</td>
-                                    <td>{{course.score}}</td>
-                                    <td>{{course.num}}</td>
-                                    <td><i class="fa fa-remove del_button" @click='removeCourse(index)'></i></td>
-                                </tr>
-                            <tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="row" id="submit-btn">
-                    <div class="col-lg-2 offset-4 col-md-1"><input type="button" class="btn btn-success"
-                            @click='saveCourse' value="保存课程信息"></div>
-
-                </div>
-            </div>
-
-
-
-
-
-
-            <div id="classInfo" class="main-content pre">
-                <div class="row">
-                    <div class="col col-lg-2 offset-5 col-md-1">
-                        <input type="button" value="添加班级" class="btn btn-info btn-lg" @click="addClass">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col col-lg-10 offset-1 col-md-8 classes-info" v-for='(classes,name,index) in classData'>
-                        <span>班级：{{name}} </span>
-                        <p v-for='(courses,index) in classes'>
-                            第 {{index+1}}节: {{courses.id}} {{courses.name}}
-                        </p>
-                        <i class="fa fa-remove del_button" @click='removeClass(index)'></i>
-
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div id="filesInfo" class="main-content pre">
-                <div class="row">
-                    <div class="col col-lg-3 col-md-2 offset-3">
-                        <button class="btn btn-info "><a href="excel/专业代号.xlsx">下载专业代号模板</span></a></button>
-                    </div>
-                    <div class="col col-lg-3 col-md-2">
-                        <button class="btn btn-info "><a href="excel/第一.二学期工作安排表.xlsx">下载工作安排表模板</span></a></button>
-
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col col-lg-12 col-md-12">
-                        <form action="" id="form">
-                            <div class="box-content">
-                                <h5 class="box-title">上传专业代号</h5>
-                                <!-- /.box-title -->
-                                <!-- /.dropdown js__dropdown -->
-                                <input type="file" class="dropify" name="major_file" id="major_file"
-                                    accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                                    data-allowed-formats="portrait square" data-max-file-size="1M"
-                                    required="required" />
-                            </div>
-
-                            <div class="box-content">
-                                <h5 class="box-title">上传工作安排表</h5>
-                                <!-- /.box-title -->
-                                <!-- /.dropdown js__dropdown -->
-                                <input type="file" class="dropify" name="job_file" id="job_file"
-                                    accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                                    data-allowed-formats="portrait square" data-max-file-size="1M"
-                                    required="required" />
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col col-lg-2 offset-5 col-md-1">
-                        <input type="button" value="上传" id="upload" class="btn btn-success" @click="upload">
-                    </div>
-                </div>
-            </div>
-
-
-
-
-
-
-            <div id="results" class="main-content pre">
-                <div class="row">
-                    <div class="col-lg-8 offset-4 col-md-6">
-                        <div class="btn-group class-select" data-toggle="buttons">
-                            <label class="btn btn-lg btn-secondary">
-                                <input type="radio" name="classes" class="classes" value="class1" checked> 班级1
-                            </label>
-                            <label class="btn btn-lg btn-secondary">
-                                <input type="radio" name="classes" class="classes" value="class2"> 班级2
-                            </label>
-
+                <div id="statics" class="main-content pre">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4">
+                            <input type="text" name="course-id" class="form-control" id="course-id" v-model="courseId"
+                                placeholder="课程号" maxlength="10">
+                            <p class="help margin-top-10 text-muted">输入课程号</p>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <input type="text" name="course-name" class="form-control" id="course-name"
+                                v-model="courseName" placeholder="课程名称" maxlength="20">
+                            <p class="help margin-top-10 text-muted">输入课程名称</p>
                         </div>
 
                     </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4">
+                            <input type="number" name="course-score" class="form-control" id="course-score"
+                                v-model="courseScore" placeholder="课程学分" max="10" min="0">
+                            <p class="help margin-top-10 text-muted">输入课程学分</p>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <input type="number" name="course-num" class="form-control" id="course-num"
+                                v-model="courseNum" placeholder="每周课程数" max="5" min="0">
+                            <p class="help margin-top-10 text-muted">输入每周课程数</p>
+                        </div>
+                        <div class="col-lg-2 col-md-2">
+                            <input type="button" value="添加课程" class="btn btn-info" @click="addCourse">
+                        </div>
+                    </div>
+
+                    <div class="row" id="course-table-area">
+                        <div class="col-lg-10 col-md-10">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">序号</th>
+                                        <th scope="col">课号</th>
+                                        <th scope="col">课程名</th>
+                                        <th scope="col">学分</th>
+                                        <th scope="col">每周课程数</th>
+                                        <th scope="col">删除</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="course-body">
+                                    <tr v-for='(course,index) in coursesData'>
+                                        <td scope="row">{{index+1}}</td>
+                                        <td>{{course.id}}</td>
+                                        <td>{{course.name}}</td>
+                                        <td>{{course.score}}</td>
+                                        <td>{{course.num}}</td>
+                                        <td><i class="fa fa-remove del_button" @click='removeCourse(index)'></i></td>
+                                    </tr>
+                                <tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="row" id="submit-btn">
+                        <div class="col-lg-2 offset-4 col-md-1"><input type="button" class="btn btn-success"
+                                @click='saveCourse' value="保存课程信息"></div>
+
+                    </div>
                 </div>
-                <div class="row" id="result-table-area">
-                    <div class="col-lg-10 offset-1 col-md-8">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th scope="col">时间</th>
-                                    <th scope="col">周一</th>
-                                    <th scope="col">周二</th>
-                                    <th scope="col">周三</th>
-                                    <th scope="col">周四</th>
-                                    <th scope="col">周五</th>
-                                    <th scope="col">周六</th>
-                                    <th scope="col">周日</th>
-                                </tr>
-                            </thead>
-                            <tbody id="result-body">
-                                <tr class="result-subbody" v-show="is_class1" id="class1"
-                                    v-for='(course,index) in middleCourseResult1'>
-                                    <th scope="row">第{{(index+1)*2-1}}-{{(index+1)*2}}节课</td>
-                                    <td v-for='detail in course'>
-                                        {{detail.id}}
-                                        <br><span class="result-name">{{detail.name}}</span>
-                                        <br><span class="result-score">score:{{detail.score}}</span>
-                                    </td>
 
-                                </tr>
-                                <tr class="result-subbody" v-show="!is_class1" id="class2"
-                                    v-for='(course,index) in middleCourseResult2'>
-                                    <th scope="row">第{{(index+1)*2-1}}-{{(index+1)*2}}节课</td>
-                                    <td v-for='detail in course'>
-                                        {{detail.id}}
-                                        <br><span class="result-name">{{detail.name}}</span>
-                                        <br><span class="result-score">score:{{detail.score}}</span>
-                                    </td>
 
-                                </tr>
-                            <tbody>
-                        </table>
+                <div id="classInfo" class="main-content pre">
+                    <div class="row">
+                        <div class="col col-lg-2 offset-5 col-md-1">
+                            <input type="button" value="添加班级" class="btn btn-info btn-lg" @click="addClass">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-lg-10 offset-1 col-md-8 classes-info"
+                            v-for='(classes,name,index) in classData'>
+                            <span>班级：{{name}} </span>
+                            <p v-for='(courses,index) in classes'>
+                                第 {{index+1}}节: {{courses.id}} {{courses.name}}
+                            </p>
+                            <i class="fa fa-remove del_button" @click='removeClass(name)'></i>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div id="manualResults" class="main-content pre">
+                    <div class="row">
+                        <div class="col-lg-8 offset-4 col-md-6">
+                            <div class="btn-group class-select" data-toggle="buttons">
+                                <label class="btn btn-md btn-info">
+                                    <input type="radio" name="classes" class="classes" value="class1" checked> 班级1
+                                </label>
+                                <label class="btn btn-md btn-info">
+                                    <input type="radio" name="classes" class="classes" value="class2"> 班级2
+                                </label>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row result-table-area" >
+                        <div class="col-lg-10 offset-1 col-md-8">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">时间</th>
+                                        <th scope="col">周一</th>
+                                        <th scope="col">周二</th>
+                                        <th scope="col">周三</th>
+                                        <th scope="col">周四</th>
+                                        <th scope="col">周五</th>
+                                        <th scope="col">周六</th>
+                                        <th scope="col">周日</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="result-body">
+                                    <tr class="result-subbody" v-show="is_class1" id="class1"
+                                        v-for='(course,index) in middleCourseResult1'>
+                                        <th scope="row">第{{(index+1)*2-1}}-{{(index+1)*2}}节课</td>
+                                        <td v-for='detail in course'>
+                                            {{detail.id}}
+                                            <br><span class="result-name">{{detail.name}}</span>
+                                            <br><span class="result-score">score:{{detail.score}}</span>
+                                        </td>
+
+                                    </tr>
+                                    <tr class="result-subbody" v-show="!is_class1" id="class2"
+                                        v-for='(course,index) in middleCourseResult2'>
+                                        <th scope="row">第{{(index+1)*2-1}}-{{(index+1)*2}}节课</td>
+                                        <td v-for='detail in course'>
+                                            {{detail.id}}
+                                            <br><span class="result-name">{{detail.name}}</span>
+                                            <br><span class="result-score">score:{{detail.score}}</span>
+                                        </td>
+
+                                    </tr>
+                                <tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
+
+
+            <div id="autoMode">
+                <div id="filesInfo" class="main-content pre">
+                    <div class="row">
+                        <div class="col col-lg-3 col-md-2 offset-3">
+                            <button class="btn btn-info "><a href="excel/专业代号.xlsx">下载专业代号模板</span></a></button>
+                        </div>
+                        <div class="col col-lg-3 col-md-2">
+                            <button class="btn btn-info "><a href="excel/第一.二学期工作安排表.xlsx">下载工作安排表模板</span></a></button>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col col-lg-12 col-md-12">
+                            <form action="" id="form">
+                                <div class="box-content">
+                                    <h5 class="box-title">上传专业代号</h5>
+                                    <!-- /.box-title -->
+                                    <!-- /.dropdown js__dropdown -->
+                                    <input type="file" class="dropify" name="major_file" id="major_file"
+                                        accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                                        data-allowed-formats="portrait square" data-max-file-size="1M"
+                                        required="required" />
+                                </div>
+
+                                <div class="box-content">
+                                    <h5 class="box-title">上传工作安排表</h5>
+                                    <!-- /.box-title -->
+                                    <!-- /.dropdown js__dropdown -->
+                                    <input type="file" class="dropify" name="job_file" id="job_file"
+                                        accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                                        data-allowed-formats="portrait square" data-max-file-size="1M"
+                                        required="required" />
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col col-lg-2 offset-5 col-md-1">
+                            <input type="button" value="上传" id="upload" class="btn btn-success" @click="upload">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="autoResults" class="main-content pre">
+                    <div class="row">
+                        <div class="col-lg-4 offset-5">
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                                 {{type}}
+                                </button>
+                                <div class="dropdown-menu" >
+                                  <a class="dropdown-item majors" href="#" v-for ="type in types" @click = "chooseMajor($event)">{{type}}</a>
+                                  
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="row result-table-area">
+                        <div class="col-lg-10 offset-1 col-md-8">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">时间</th>
+                                        <th scope="col">周一</th>
+                                        <th scope="col">周二</th>
+                                        <th scope="col">周三</th>
+                                        <th scope="col">周四</th>
+                                        <th scope="col">周五</th>
+                                        <th scope="col">周六</th>
+                                        <th scope="col">周日</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="result-body">
+                                    <tr class="result-subbody" id="class1"
+                                        v-for='(course,index) in courseResultNow'>
+                                        <th scope="row">第{{(index+1)*2-1}}-{{(index+1)*2}}节课</td>    
+                                        <td v-for='detail in course'>
+                                            {{detail}}
+                                            <!--<br><span class="result-name">{{detail.name}}</span>
+                                            <br><span class="result-score">score:{{detail.score}}</span>-->
+                                        </td>
+
+                                    </tr>
+
+                                <tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
         </div>
 
 
@@ -355,9 +407,12 @@
     <script src="js/jquery-1.9.1.min.js"></script>
     <script src="js/index.js"></script>
     <script src="js/Upload.js"></script>
+    <script src="js/manualSchedule.js"></script>
+    <script src="js/autoSchedule.js"></script>
 
     <script src="assets/scripts/modernizr.min.js"></script>
-
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     <!-- Dropify -->
     <script src="assets/plugin/dropify/js/dropify.min.js"></script>

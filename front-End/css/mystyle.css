@@ -309,28 +309,35 @@ body {
     cursor: pointer;
 }
 
-#results {
+#manualResults {
     display: none;
 }
 
-#result-table-area td,
+#autoResults{
+    display: none;
+}
+.result-table-area {
+    margin-top:30px;
+}
+
+.result-table-area td,
 th {
     text-align: center;
 
 }
 
-#result-body td {
+.result-body td {
     color: purple;
     font-size: medium;
 }
 
-#result-body .result-name {
+.result-body .result-name {
     font-weight: bolder;
     font-size: larger;
     color: black;
 }
 
-#result-body .result-score {
+.result-body .result-score {
     font-weight: lighter;
     color: black;
 }
@@ -401,22 +408,16 @@ th {
     z-index: 9999;
     position: absolute;
     left: 50%;
-    top: 30%;
-    transform: translate(-50%, -30%);
+    top: 45%;
+    transform: translate(-50%, -50%);
     text-align: center;
-    color: greenyellow;
+    color: rgb(249, 255, 240);
     font-size: 35pt;
-    font-family: kaiti;
-    border: 5px solid white;
-    border-radius: 10px;
+   
 }
 
-.new1+i {
+.new1 i {
     z-index: 9999;
-    position: absolute;
-    left: 46%;
-    top: 40%;
-    transform: translate(-46%, -40%);
     color: white;
 }
 

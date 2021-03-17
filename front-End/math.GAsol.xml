@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <session course="12208401" day="2" period="0" periodWithin="12"/>
+    <session course="12208401" day="3" period="4" periodWithin="22"/>
+    <session course="12210201" day="0" period="3" periodWithin="3"/>
+    <session course="12210201" day="4" period="0" periodWithin="24"/>
+    <session course="12214901" day="1" period="0" periodWithin="6"/>
+    <session course="12214901" day="4" period="3" periodWithin="27"/>
+    <session course="12215001" day="1" period="0" periodWithin="6"/>
+    <session course="12215001" day="4" period="4" periodWithin="28"/>
+    <session course="12222301" day="0" period="0" periodWithin="0"/>
+    <session course="12222301" day="3" period="3" periodWithin="21"/>
+    <session course="12228001" day="0" period="0" periodWithin="0"/>
+    <session course="12228001" day="2" period="1" periodWithin="13"/>
+    <session course="12228201" day="1" period="1" periodWithin="7"/>
+    <session course="12228201" day="3" period="5" periodWithin="23"/>
+    <session course="12228401" day="1" period="1" periodWithin="7"/>
+    <session course="12228401" day="3" period="5" periodWithin="23"/>
+    <session course="12228501" day="0" period="1" periodWithin="1"/>
+    <session course="12228501" day="2" period="5" periodWithin="17"/>
+    <session course="12228502" day="1" period="1" periodWithin="7"/>
+    <session course="12228502" day="3" period="1" periodWithin="19"/>
+    <session course="12228601" day="0" period="5" periodWithin="5"/>
+    <session course="12228601" day="4" period="2" periodWithin="26"/>
+    <session course="12229801" day="2" period="3" periodWithin="15"/>
+    <session course="12230301" day="2" period="5" periodWithin="17"/>
+    <session course="12230301" day="4" period="5" periodWithin="29"/>
+</root>

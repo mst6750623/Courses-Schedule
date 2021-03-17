@@ -21,29 +21,37 @@ var app = new Vue({
             var courseInfo = a.join('-');
             if (sessionStorage.getItem('classId') == null || sessionStorage.getItem("classId") == '') {
                 var index = "class1";
-                console.log("page2-index1", index);
+                //console.log("page2-index1", index);
                 this.classId.push(index);
                 sessionStorage.setItem("classId", this.classId);
                 sessionStorage.setItem(index, courseInfo);
             } else {
                 var classId = sessionStorage.getItem("classId").split(',');
-                for (var i = 0; i < classId.length; i++) {
+                var i = 0;
+                for (i = 0; i < classId.length; i++) {
                     this.classId.push(classId[i]);
                 }
-                var num = parseInt(classId[classId.length - 1].slice(5)) + 1;
-                if (num > 2) {
+                if (i == 2) {
                     alert("暂时只支持两个班级的排课哦！");
                     return;
                 }
-                console.log("page2-num", num);
-                var index = "class" + num;
-                console.log("page2-index2", index);
-                this.classId.push(index);
+                var num = parseInt(classId[classId.length - 1].slice(5));
+                var index;
+                if(num == 2){
+                    num = 1;
+                    index = "class" + num;
+                    this.classId.unshift(index);
+                }
+                else{
+                    num = 2;
+                    index = "class" + num;
+                    this.classId.push(index);
+                }
                 sessionStorage.setItem("classId", this.classId);
                 sessionStorage.setItem(index, courseInfo);
             }
             //window.parent.reload();
-            parent.login_complete();
+            parent.login_complete(true);
         }
 
     },
@@ -64,9 +72,5 @@ var app = new Vue({
         //this.$data.courseids.set(sessionStorage.getItem("courseids").split("-"));
         console.log('page2-courseids', JSON.stringify(this.courseids));
     }
-
-})
-
-$(document).ready(function () {
 
 })
