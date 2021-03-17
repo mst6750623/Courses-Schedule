@@ -45,7 +45,7 @@ def constraint(courses_arrangement, curricula):
 
 
 #离散程度函数
-def F_discrete(pop):
+def F_discrete(pop, POP_SIZE):
     f_discrete = np.zeros(POP_SIZE)
     for k in range(0, POP_SIZE):
         value = 0
@@ -67,7 +67,7 @@ def F_discrete(pop):
 
 
 #疲劳度函数
-def F_tired(pop):
+def F_tired(pop, POP_SIZE):
     f_tired = np.zeros(POP_SIZE)
     n = np.zeros(5)
     for k in range(0, POP_SIZE):
@@ -84,7 +84,7 @@ def F_tired(pop):
 
 
 # Teachers' unavailability
-def F_unavailability(pop):
+def F_unavailability(pop, POP_SIZE, constraint_courses, constraint_periods):
     f_unavailability = np.zeros(POP_SIZE)
     for k in range(POP_SIZE):
         for course in pop[k].keys():
@@ -96,7 +96,7 @@ def F_unavailability(pop):
 
 
 #锦标赛选择法
-def selection(pop, f_fitness):
+def selection(pop, POP_SIZE, f_fitness):
     new_pop = []
     n = round(POP_SIZE*0.3)
     temperary = np.zeros(n)
@@ -123,7 +123,7 @@ def selection(pop, f_fitness):
 
 
 #交叉，pc是交叉概率
-def crossover(pop, pc):
+def crossover(pop, POP_SIZE, pc, Course_num, curricula):
     new_pop = pop.copy()
     for k in range(0, POP_SIZE-1, 2):
         if random.random()<pc:
@@ -146,7 +146,7 @@ def crossover(pop, pc):
 
 
 #变异，pm为变异概率
-def mutation(pop, pm):
+def mutation(pop, POP_SIZE, pm, Course_num, curricula):
     new_pop = pop.copy()
     for k in range(0, POP_SIZE):
         if random.random() < pm:
@@ -172,7 +172,7 @@ def mutation(pop, pm):
     return new_pop
 
 
-def best(pop, f_fitness):
+def best(pop, POP_SIZE, f_fitness):
     best_fitness = 10000000
     for k in range(0, POP_SIZE):
         if f_fitness[k] < best_fitness:
@@ -336,9 +336,9 @@ def main():
         pop.append(courses_arrangement.copy())
         i += 1
     
-    f_discrete = F_discrete(pop) #离散程度
-    f_tired = F_tired(pop) #疲劳度
-    f_unavailability = F_unavailability(pop)
+    f_discrete = F_discrete(pop, POP_SIZE) #离散程度
+    f_tired = F_tired(pop, POP_SIZE) #疲劳度
+    f_unavailability = F_unavailability(pop, POP_SIZE, constraint_courses, constraint_periods)
     [k1, k2, k3] = [0.01, 5, 1] #适应度函数中的各函数权重
     f_fitness = k1*f_discrete+k2*f_tired+k3*f_unavailability #适应度函数
     
@@ -349,14 +349,16 @@ def main():
     fitness_value = np.zeros(iteration)
     for n in range(0, iteration):
         # print(n)
-        pop = selection(pop, f_fitness) #运用锦标赛算法选择新的个体
-        pop = crossover(pop, 0.1) #交叉
-        pop = mutation(pop, 0.3) #变异
-        f_discrete = F_discrete(pop)
-        f_tired = F_tired(pop)
-        f_unavailability = F_unavailability(pop)
+        pop = selection(pop, POP_SIZE, f_fitness) #运用锦标赛算法选择新的个体
+        pop = crossover(pop, POP_SIZE, 0.1, Course_num, curricula) #交叉
+        pop = mutation(pop, POP_SIZE, 0.3, Course_num, curricula) #变异
+        f_discrete = F_discrete(pop, POP_SIZE)
+        print('f_discrete =',min(f_discrete))
+        f_tired = F_tired(pop, POP_SIZE)
+        print('f_tired =',min(f_tired))
+        f_unavailability = F_unavailability(pop, POP_SIZE, constraint_courses, constraint_periods)
         f_fitness = k1*f_discrete+k2*f_tired+k3*f_unavailability
-        [best_individual[n], fitness_value[n]] = best(pop, f_fitness)
+        [best_individual[n], fitness_value[n]] = best(pop, POP_SIZE, f_fitness)
         print(fitness_value[n])
     best_fitness = 10000000
     for i in range(0, iteration):
@@ -369,8 +371,8 @@ def main():
     x_value = list(range(1, iteration+1))
     y_value = fitness_value
     plt.plot(x_value, y_value)
-    # plt.savefig(r'C:\Users\45331\Desktop\pic.jpg')
     
+    period_room = {}
     arrangement_result = []
     for course in best_individual[best_individual_number].keys():
         for period in [i for i,x in enumerate(best_individual[best_individual_number][course]) if x==1]:
