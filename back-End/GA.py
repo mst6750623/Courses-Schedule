@@ -181,7 +181,7 @@ def best(pop, POP_SIZE, f_fitness):
     best_individual = pop[best_individual_num]
     return [best_individual, best_fitness]
 
-@app.route("/api/Upload", methods=["POST"])
+@app.route("/api/Upload", methods=["GET"])
 def main():
         
     root = ET.parse('./data/mathnew.txt.sol317.xml').getroot()
