@@ -1,0 +1,44 @@
+Name: 汽车学院2018级车辆工程(创新实验区)专业编号：19002
+Courses: 6
+Rooms: 10
+Days: 5
+Periods_per_day: 6
+Curricula: 8
+Constraints: 0
+
+COURSES: 
+course_name teacher_name num_of_lectures min_working_days(soft, less important) num_of_students
+19001501 05015 3 3 76 
+19001502 05230 3 3 75 
+19001503 01110 3 3 75 
+19013501 99044 2 2 10 
+19014001 09056 1 1 10 
+19017801 07131 2 2 10 
+
+ROOMS: 
+room_name room_capacity
+room1 150
+room2 50
+room3 60
+room5 100
+room6 150
+room7 60
+room8 100
+room9 150
+room10 100
+
+CURRICULA: 
+curricula_name num_of_courses_per_curricula n_courses for a group that cannot be set on the same time 
+q0 2 19001501 19001502 
+q1 2 19001501 19001503 
+q2 4 19001502 19013501 19014001 19017801 
+q3 6 19001501 19001502 19001503 19013501 19014001 19017801 
+q4 3 19001501 19001503 19017801 
+q5 2 19001502 19017801 
+q6 2 19013501 19014001 
+q7 3 19001501 19001502 19014001 
+
+UNAVAILABILITY_CONSTRAINTS: 
+course_name day period day_and_period pair for teacher's unavailability 
+
+END.

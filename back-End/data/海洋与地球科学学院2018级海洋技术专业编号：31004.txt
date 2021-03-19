@@ -1,0 +1,42 @@
+Name: 海洋与地球科学学院2018级海洋技术专业编号：31004
+Courses: 5
+Rooms: 10
+Days: 5
+Periods_per_day: 6
+Curricula: 7
+Constraints: 0
+
+COURSES: 
+course_name teacher_name num_of_lectures min_working_days(soft, less important) num_of_students
+10053303 91024 2 2 0 
+31014901 08114 1 1 31 
+31019401 08034 1 1 15 
+31019801 11154 1 1 15 
+31020001 14025 1 1 15 
+
+ROOMS: 
+room_name room_capacity
+room1 150
+room2 50
+room3 60
+room5 100
+room6 150
+room7 60
+room8 100
+room9 150
+room10 100
+
+CURRICULA: 
+curricula_name num_of_courses_per_curricula n_courses for a group that cannot be set on the same time 
+q0 0 
+q1 4 31014901 10053303 31019401 31020001 
+q2 2 10053303 31020001 
+q3 4 31014901 10053303 31019801 31020001 
+q4 2 31014901 31019401 
+q5 5 31014901 10053303 31019401 31019801 31020001 
+q6 2 31019801 31020001 
+
+UNAVAILABILITY_CONSTRAINTS: 
+course_name day period day_and_period pair for teacher's unavailability 
+
+END.
