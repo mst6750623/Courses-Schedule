@@ -39,7 +39,7 @@ var app = new Vue({
 
             $.ajax({
                 type: 'POST',
-                url: '/api/v1.0/tasks',
+                url: '/manual/api',
                 data: JSON.stringify(data),
                 contentType: "application/json",
                 dataType: "json",
@@ -64,15 +64,13 @@ var app = new Vue({
             add_loader();
             $.ajax({
                 type: 'GET',
-                url: '/api/Upload',
+                url: 'http://localhost:5002/auto/api',
                 //data: JSON.stringify(data),
                 //contentType: "application/json",
                 //dataType: "json",
                 success: function (data) {
                     var result = JSON.parse(data);
                     var arr = Object.keys(result);
-                    console.log("result: " + result);
-                    console.log("arr: " + arr);
                     for (var i = 0; i < arr.length; i++) {
                         console.log("arr[i]: " +  arr[i]);
                         var val = result[arr[i]];
@@ -91,9 +89,12 @@ var app = new Vue({
                             auto.middleCourseResult[row][col] = content;
                         }
                         Vue.set(auto.courseResultAll, arr[i], auto.middleCourseResult);
+                        localStorage.setItem(arr[i],JSON.stringify(auto.middleCourseResult));
                     }
+                    localStorage.setItem("major-types", JSON.stringify(auto.types));
                     var nowArr = auto.courseResultAll[arr[0]];
                     auto.courseResultNow = nowArr;
+                    auto.type = arr[0];
                     remove_loader();
                 },
                 error: function () {
@@ -121,7 +122,8 @@ var app = new Vue({
             //Vue.set(auto.courseResultNow, nowArr);
             console.log(auto.courseResultNow);*/
         }
-    }
+    },
+    
 })
 
 function resultTOMiddle() {

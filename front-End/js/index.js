@@ -4,6 +4,7 @@ $(document).ready(function () {
         pre.middleCourseResult1[i] = new Array();
         pre.middleCourseResult2[i] = new Array();
         auto.middleCourseResult[i] = new Array();
+        
         for (var j = 0; j < 7; j++) {
             pre.middleCourseResult1[i][j] = {
                 id: "",
@@ -16,10 +17,9 @@ $(document).ready(function () {
                 score: ""
             };
             auto.middleCourseResult[i][j] = "";
+           
         }
-        auto.courseResultAll["软件工程"] = auto.middleCourseResult;
-        auto.courseResultAll["土木工程"] = auto.middleCourseResult;
-        auto.courseResultAll["统计学"] = auto.middleCourseResult;
+        
 
     }
 

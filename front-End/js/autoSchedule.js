@@ -1,5 +1,5 @@
 var auto = new Vue({
-    el:"#autoMode",
+    el: "#autoMode",
     data: {
         title: "",
         courseId: "",
@@ -7,7 +7,7 @@ var auto = new Vue({
         courseScore: "",
         courseNum: "",
         is_class1: true,
-        type:"选择专业",
+        type: "选择专业",
         coursesData: [
 
         ],
@@ -17,21 +17,19 @@ var auto = new Vue({
         classData: {
 
         },
-        courseResultAll:{
-            "软件工程":[],
-            "统计学":[],
-            "土木工程":[]
+        courseResultAll: {
+           
         },
-        courseResultNow:[
+        courseResultNow: [
 
         ],
         types: [
-            "软件工程", "统计学", "土木工程"
+            
         ],
         middleCourseResult: new Array(),
 
     },
-    methods:{
+    methods: {
         upload: function () {
             var form = document.querySelector("#form");
             var formlist = new FormData(form);
@@ -57,8 +55,8 @@ var auto = new Vue({
                         $('.dropify-render .dropify-extension').remove();
                         $('.dropify-render i').remove();
                         $('.dropify-render img').remove();
-                        $('.dropify-preview').css('display','none');
-                        
+                        $('.dropify-preview').css('display', 'none');
+
                     }
                 });
             } else {
@@ -66,17 +64,30 @@ var auto = new Vue({
             }
 
         },
-        chooseMajor:function(event){
+        chooseMajor: function (event) {
 
             var type = event.currentTarget.innerText;
             console.log(auto.types);
             auto.type = type;
-            /*var nowArr = auto.courseResultAll[type];
-            auto.courseResultNow = nowArr;*/
+            var nowArr = auto.courseResultAll[type];
+            auto.courseResultNow = nowArr;
         }
     },
-    mounted: function(){
-       
+    mounted: function () {
+
+        if (localStorage.getItem("major-types") != null) {
+            this.types = JSON.parse(localStorage.getItem("major-types"));
+            for (var i = 0; i< this.types.length;i++) {
+                var type = this.types[i];
+                if (localStorage.getItem(type)) {
+                    var temp_course = JSON.parse(localStorage.getItem(type));
+                    Vue.set(this.courseResultAll, type, temp_course);
+                } else {
+                    Vue.set(this.courseResultAll, type, "");
+                }
+
+            }
+        }
+
     }
 })
-

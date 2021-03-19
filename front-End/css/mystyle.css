@@ -328,7 +328,7 @@ body {
 }
 
 .table th{
-    min-width:150px;
+    min-width:120px;
 }
 .result-body td {
     color: purple;
