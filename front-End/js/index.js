@@ -17,6 +17,10 @@ $(document).ready(function () {
             };
             auto.middleCourseResult[i][j] = "";
         }
+        auto.courseResultAll["软件工程"] = auto.middleCourseResult;
+        auto.courseResultAll["土木工程"] = auto.middleCourseResult;
+        auto.courseResultAll["统计学"] = auto.middleCourseResult;
+
     }
 
     $('.mynav').click(function () {

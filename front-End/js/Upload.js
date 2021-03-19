@@ -39,7 +39,7 @@ var app = new Vue({
 
             $.ajax({
                 type: 'POST',
-                url: '/todo/api/v1.0/tasks',
+                url: '/api/v1.0/tasks',
                 data: JSON.stringify(data),
                 contentType: "application/json",
                 dataType: "json",
@@ -61,21 +61,39 @@ var app = new Vue({
             });
         },
         submitAutoResult: function () {
-            /*add_loader();
+            add_loader();
             $.ajax({
-                type: 'POST',
-                url: '/todo/api/v1.0/tasks',
-                data: JSON.stringify(data),
-                contentType: "application/json",
-                dataType: "json",
+                type: 'GET',
+                url: '/api/Upload',
+                //data: JSON.stringify(data),
+                //contentType: "application/json",
+                //dataType: "json",
                 success: function (data) {
-                    // Vue.set(pre.courseResult,data);
-                    pre.courseResult1 = data.class1;
-                    pre.courseResult2 = data.class2;
-                    console.log('data', data);
-                    console.log('result', pre.courseResult1, 'result2', pre.courseResult2);
-                    resultTOMiddle();
-                    //console.log(pre.coursesData);
+                    var result = JSON.parse(data);
+                    var arr = Object.keys(result);
+                    console.log("result: " + result);
+                    console.log("arr: " + arr);
+                    for (var i = 0; i < arr.length; i++) {
+                        console.log("arr[i]: " +  arr[i]);
+                        var val = result[arr[i]];
+                        arr[i] = arr[i].substring(0, arr[i].length - 1);
+                        console.log("arr[i]: " +  arr[i]);
+                        auto.types.push(arr[i]);
+                        console.log("types: " + auto.types);
+                        for (var j = 0; j < val.length; j++) {
+                            //[2]为period,[3]为day
+                            var row = val[j][2];
+                            var col = val[j][3];
+                            var content = {};
+                            content["courseNum"] = val[j][0];
+                            content["teacherNum"] = val[j][1];
+                            content["roomNum"] = val[j][4];
+                            auto.middleCourseResult[row][col] = content;
+                        }
+                        Vue.set(auto.courseResultAll, arr[i], auto.middleCourseResult);
+                    }
+                    var nowArr = auto.courseResultAll[arr[0]];
+                    auto.courseResultNow = nowArr;
                     remove_loader();
                 },
                 error: function () {
@@ -83,13 +101,13 @@ var app = new Vue({
                     remove_loader();
                 }
 
-            });*/
-            var XMLtxt = '<?xml version="1.0" encoding="utf-8"?><root><session course="12208401" day="2" period="0" periodWithin="12"/><session course="12208401" day="3" period="4" periodWithin="22"/><session course="12210201" day="0" period="3" periodWithin="3"/><session course="12210201" day="4" period="0" periodWithin="24"/><session course="12214901" day="1" period="0" periodWithin="6"/><session course="12214901" day="4" period="3" periodWithin="27"/><session course="12215001" day="1" period="0" periodWithin="6"/><session course="12215001" day="4" period="4" periodWithin="28"/><session course="12222301" day="0" period="0" periodWithin="0"/><session course="12222301" day="3" period="3" periodWithin="21"/><session course="12228001" day="0" period="0" periodWithin="0"/><session course="12228001" day="2" period="1" periodWithin="13"/><session course="12228201" day="1" period="1" periodWithin="7"/><session course="12228201" day="3" period="5" periodWithin="23"/><session course="12228401" day="1" period="1" periodWithin="7"/><session course="12228401" day="3" period="5" periodWithin="23"/><session course="12228501" day="0" period="1" periodWithin="1"/><session course="12228501" day="2" period="5" periodWithin="17"/><session course="12228502" day="1" period="1" periodWithin="7"/><session course="12228502" day="3" period="1" periodWithin="19"/><session course="12228601" day="0" period="5" periodWithin="5"/><session course="12228601" day="4" period="2" periodWithin="26"/><session course="12229801" day="2" period="3" periodWithin="15"/><session course="12230301" day="2" period="5" periodWithin="17"/><session course="12230301" day="4" period="5" periodWithin="29"/></root>'
+            });
+            /*var XMLtxt = '<?xml version="1.0" encoding="utf-8"?><root><session course="12208401" day="2" period="0" periodWithin="12"/><session course="12208401" day="3" period="4" periodWithin="22"/><session course="12210201" day="0" period="3" periodWithin="3"/><session course="12210201" day="4" period="0" periodWithin="24"/><session course="12214901" day="1" period="0" periodWithin="6"/><session course="12214901" day="4" period="3" periodWithin="27"/><session course="12215001" day="1" period="0" periodWithin="6"/><session course="12215001" day="4" period="4" periodWithin="28"/><session course="12222301" day="0" period="0" periodWithin="0"/><session course="12222301" day="3" period="3" periodWithin="21"/><session course="12228001" day="0" period="0" periodWithin="0"/><session course="12228001" day="2" period="1" periodWithin="13"/><session course="12228201" day="1" period="1" periodWithin="7"/><session course="12228201" day="3" period="5" periodWithin="23"/><session course="12228401" day="1" period="1" periodWithin="7"/><session course="12228401" day="3" period="5" periodWithin="23"/><session course="12228501" day="0" period="1" periodWithin="1"/><session course="12228501" day="2" period="5" periodWithin="17"/><session course="12228502" day="1" period="1" periodWithin="7"/><session course="12228502" day="3" period="1" periodWithin="19"/><session course="12228601" day="0" period="5" periodWithin="5"/><session course="12228601" day="4" period="2" periodWithin="26"/><session course="12229801" day="2" period="3" periodWithin="15"/><session course="12230301" day="2" period="5" periodWithin="17"/><session course="12230301" day="4" period="5" periodWithin="29"/></root>'
             var param = $(XMLtxt).find('session');
-            /*var middleCourseResult = new Array();
+            var middleCourseResult = new Array();
             for (var i = 0; i < 5; i++) {
                 middleCourseResult[i] = new Array();
-            }*/
+            }
             
             for (var i = 0; i < param.length; i++) {
                 var row = parseInt($(param[i]).attr('period'));
@@ -101,7 +119,7 @@ var app = new Vue({
             var nowArr = auto.courseResultAll[auto.types[3]];
             auto.courseResultNow = nowArr;
             //Vue.set(auto.courseResultNow, nowArr);
-            console.log(auto.courseResultNow);
+            console.log(auto.courseResultNow);*/
         }
     }
 })

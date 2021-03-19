@@ -318,22 +318,38 @@ body {
 }
 .result-table-area {
     margin-top:30px;
+    margin-left:auto;
+    margin-right:auto;
 }
 
-.result-table-area td,
-th {
+.result-table-area td,th {
     text-align: center;
 
 }
 
+.table th{
+    min-width:150px;
+}
 .result-body td {
     color: purple;
     font-size: medium;
 }
+.result-body b{
+    color:rgb(56, 56, 56);
+}
 
 .result-body .result-name {
-    font-weight: bolder;
+    font-weight: medium;
     font-size: larger;
+    color: black;
+}
+
+.result-body .result-teacher {
+    font-weight: medium;
+    color: black;
+}
+.result-body .result-room {
+    font-weight: medium;
     color: black;
 }
 

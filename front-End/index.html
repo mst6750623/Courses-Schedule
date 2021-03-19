@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/mystyle.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="css/bootstrap.min.css"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <!-- Dropify -->
     <link rel="stylesheet" href="assets/plugin/dropify/css/dropify.min.css">
 
@@ -42,7 +43,7 @@
                                 <a class="nav-link" href="#"><i class="fa fa-database"></i> 排课结果</a>
                             </li>
                             <li name="submit">
-                                <a class="nav-link" href="#" @click="submitManualResult"><i class="fa fa-operate"></i>
+                                <a class="nav-link" href="#" @click="submitManualResult"><i class="fa fa-play"></i>
                                     开始手动排课</a>
                             </li>
                         </ul>
@@ -61,7 +62,7 @@
                                 <a class="nav-link" href="#"><i class="fa fa-database"></i> 排课结果</a>
                             </li>
                             <li name="submit">
-                                <a class="nav-link" href="#" @click="submitAutoResult"><i class="fa fa-operate"></i>
+                                <a class="nav-link" href="#" @click="submitAutoResult"><i class="fa fa-play-circle"></i>
                                     开始自动排课</a>
                             </li>
                         </ul>
@@ -307,11 +308,15 @@
             <div id="autoMode">
                 <div id="filesInfo" class="main-content pre">
                     <div class="row">
-                        <div class="col col-lg-3 col-md-2 offset-3">
-                            <button class="btn btn-info "><a href="excel/专业代号.xlsx">下载专业代号模板</span></a></button>
+                        <div class="col col-lg-3 col-md-2 offset-2">
+                            <button class="btn btn-info "><a href="/excel/" download="专业代号.xlsx">下载专业代号模板</span></a></button>
                         </div>
                         <div class="col col-lg-3 col-md-2">
-                            <button class="btn btn-info "><a href="excel/第一.二学期工作安排表.xlsx">下载工作安排表模板</span></a></button>
+                            <button class="btn btn-info "><a href="/excel/" download="第一.二学期工作安排表.xlsx">下载工作安排表模板</span></a></button>
+
+                        </div>
+                        <div class="col col-lg-3 col-md-2">
+                            <button class="btn btn-info "><a href="/excel/">打开下载列表</span></a></button>
 
                         </div>
                     </div>
@@ -335,7 +340,7 @@
                                     <!-- /.dropdown js__dropdown -->
                                     <input type="file" class="dropify" name="job_file" id="job_file"
                                         accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                                        data-allowed-formats="portrait square" data-max-file-size="1M"
+                                        data-allowed-formats="portrait square" data-max-file-size="5M"
                                         required="required" />
                                 </div>
                             </form>
@@ -348,7 +353,7 @@
 
                 <div id="autoResults" class="main-content pre">
                     <div class="row">
-                        <div class="col-lg-4 offset-5">
+                        <div class="col-lg-4 offset-2">
                             <div class="dropdown">
                                 <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
                                  {{type}}
@@ -361,7 +366,7 @@
                         </div>
                     </div>
                     <div class="row result-table-area">
-                        <div class="col-lg-10 offset-1 col-md-8">
+                        <div class="col-lg-10 col-md-8">
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
@@ -380,7 +385,10 @@
                                         v-for='(course,index) in courseResultNow'>
                                         <th scope="row">第{{(index+1)*2-1}}-{{(index+1)*2}}节课</td>    
                                         <td v-for='detail in course'>
-                                            {{detail}}
+                                            <span class="result-name" v-show='detail==""?false:true'>课号 <b>{{detail.courseNum}}</b> </br></span>
+                                            <span class="result-teacher" v-show='detail==""?false:true'>教师 <b>{{detail.teacherNum}}</b> </br></span>
+                                            <span class="result-room" v-show='detail==""?false:true'>教室 <b>{{detail.roomNum}}</b> </br></span>
+
                                             <!--<br><span class="result-name">{{detail.name}}</span>
                                             <br><span class="result-score">score:{{detail.score}}</span>-->
                                         </td>

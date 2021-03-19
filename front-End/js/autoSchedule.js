@@ -18,7 +18,9 @@ var auto = new Vue({
 
         },
         courseResultAll:{
-
+            "软件工程":[],
+            "统计学":[],
+            "土木工程":[]
         },
         courseResultNow:[
 
@@ -36,7 +38,7 @@ var auto = new Vue({
             if ($('#job_file').val() != '' || $('#major_file').val() != '') {
                 $.ajax({
                     type: "POST",
-                    url: "http://127.0.0.1:5000/api/Upload",
+                    url: "/api/Upload",
                     data: formlist,
                     processData: false,
                     contentType: false,
