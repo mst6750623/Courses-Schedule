@@ -1,3 +1,3 @@
-<solution submodelCost='0' cost='365' data='.\海洋与地球科学学院\2018-31004.txt' type='FixPeriod' discovered='1' neighbourhoodLB='0' penaltyRoomCapacity='0' penaltyMinCourseDays='1' penaltyCompactness='180' penaltyRoomStability='0' >
+<solution submodelCost='0' cost='365' data='.\2018-31004.txt' type='FixPeriod' discovered='1' neighbourhoodLB='0' penaltyRoomCapacity='0' penaltyMinCourseDays='1' penaltyCompactness='180' penaltyRoomStability='0' >
 <session course='10053303' room='room9' period='0' day='0' periodWithin='0'/> <session course='10053303' room='room9' period='1' day='0' periodWithin='1'/> <session course='31014901' room='room9' period='4' day='0' periodWithin='4'/> <session course='31019401' room='room9' period='3' day='0' periodWithin='3'/> <session course='31019801' room='room9' period='2' day='0' periodWithin='2'/> <session course='31020001' room='room9' period='6' day='1' periodWithin='0'/> </solution>
 

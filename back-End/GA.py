@@ -194,7 +194,7 @@ def main():
     pathFile = open("C:\\Users\\harviMa\\Desktop\\back-End\\filepath.txt", 'r', encoding='utf-8')
     for line in pathFile:
         txtPath = line.split(' ')[0]
-        xmlPath = line.split(' ')[1]
+        xmlPath = line.split(' ')[1].replace("\n","")
         print(txtPath," ",xmlPath)
         #root = ET.parse('C:\\Users\\harviMa\\Desktop\\back-End\\data\\mathnew.txt.sol317.xml').getroot()
         xmlPath = 'C:\\Users\\harviMa\\Desktop\\back-End\\data\\'+xmlPath
