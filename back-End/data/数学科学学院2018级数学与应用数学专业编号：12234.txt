@@ -1,21 +1,21 @@
-Name: 数学科学学院2018级数学与应用数学专业编号：12234
+Name: 2018-12234
 Courses: 8
 Rooms: 10
 Days: 5
 Periods_per_day: 6
-Curricula: 9
+Curricula: 2
 Constraints: 0
 
 COURSES: 
-course_name teacher_name num_of_lectures min_working_days(soft, less important) num_of_students
-12214901 92094 2 2 70 
-12215001 05049 2 2 130 
-12215301 18521 2 2 75 
-12222301 05139 2 2 150 
-12228401 14159 2 2 78 
-12228501 01064 2 2 50 
-12228502 10023 2 2 40 
-12228601 14123 2 2 110 
+// course_name teacher_name num_of_lectures min_working_days(soft, less important) num_of_students credit
+12214901 ['92094'] 2 2 70 3.0 
+12215001 ['05049'] 2 2 130 3.0 
+12215301 ['18521'] 2 2 75 3.0 
+12222301 ['05139'] 2 2 150 3.0 
+12228401 ['14159'] 2 2 78 4.0 
+12228501 ['01064'] 2 2 50 4.0 
+12228502 ['10023'] 2 2 40 4.0 
+12228601 ['14123'] 2 2 110 3.0 
 
 ROOMS: 
 room_name room_capacity
@@ -30,18 +30,11 @@ room9 150
 room10 100
 
 CURRICULA: 
-curricula_name num_of_courses_per_curricula n_courses for a group that cannot be set on the same time 
-q0 2 12228501 12228502 
-q1 3 12215301 12228401 12228502 
-q2 5 12214901 12215001 12222301 12228501 12228502 
-q3 4 12214901 12228502 12228601 12215301 
-q4 6 12222301 12228401 12228501 12228502 12228601 12215301 
-q5 3 12222301 12228502 12228601 
-q6 4 12214901 12215001 12222301 12228401 
-q7 5 12214901 12215001 12228401 12228501 12228601 
-q8 4 12215001 12222301 12228401 12215301 
+// curricula_name num_of_courses_per_curricula n_courses for a group that cannot be set on the same time 
+q0 2 ['12228501', '12228502'] 
+q1 3 ['12215301', '12228401', '12228502'] 
 
 UNAVAILABILITY_CONSTRAINTS: 
-course_name day period day_and_period pair for teacher's unavailability 
+// course_name day period day_and_period pair for teacher's unavailability 
 
 END.

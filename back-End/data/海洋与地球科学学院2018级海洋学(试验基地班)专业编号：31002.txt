@@ -1,20 +1,20 @@
-Name: 海洋与地球科学学院2018级海洋学(试验基地班)专业编号：31002
+Name: 2018-31002
 Courses: 7
 Rooms: 10
 Days: 5
 Periods_per_day: 6
-Curricula: 6
+Curricula: 1
 Constraints: 0
 
 COURSES: 
-course_name teacher_name num_of_lectures min_working_days(soft, less important) num_of_students
-31005001 03043 2 2 20 
-31008501 05163 2 2 16 
-31009901 05051 2 2 16 
-31011001 01094 2 2 26 
-31011801 01013 1 1 20 
-31014901 08114 1 1 31 
-31018401 02037 1 1 16 
+// course_name teacher_name num_of_lectures min_working_days(soft, less important) num_of_students credit
+31005001 ['03043'] 2 2 20 2.0 
+31008501 ['05163'] 2 2 16 3.0 
+31009901 ['05051'] 2 2 16 3.0 
+31011001 ['01094'] 2 2 26 4.0 
+31011801 ['01013'] 1 1 20 2.0 
+31014901 ['08114'] 1 1 31 2.0 
+31018401 ['02037'] 1 1 16 2.0 
 
 ROOMS: 
 room_name room_capacity
@@ -29,15 +29,10 @@ room9 150
 room10 100
 
 CURRICULA: 
-curricula_name num_of_courses_per_curricula n_courses for a group that cannot be set on the same time 
-q0 0 
-q1 7 31005001 31008501 31009901 31011001 31011801 31014901 31018401 
-q2 5 31008501 31009901 31011001 31011801 31014901 
-q3 4 31005001 31008501 31011801 31018401 
-q4 3 31005001 31011001 31014901 
-q5 2 31008501 31009901 
+// curricula_name num_of_courses_per_curricula n_courses for a group that cannot be set on the same time 
+q0 0 [] 
 
 UNAVAILABILITY_CONSTRAINTS: 
-course_name day period day_and_period pair for teacher's unavailability 
+// course_name day period day_and_period pair for teacher's unavailability 
 
 END.

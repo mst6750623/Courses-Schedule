@@ -191,14 +191,14 @@ def best(pop, POP_SIZE, f_fitness):
 @app.route("/auto/api", methods=["GET"])
 def main():
     json_dict = {}
-    pathFile = open("C:\\Users\\harviMa\\Desktop\\back-End\\filepath.txt", 'r', encoding='utf-8')
+    pathFile = open("C:\\Users\\harviMa\\Desktop\\Github-Clone\\Courses-Schedule\\back-End\\filepath.txt", 'r', encoding='utf-8')
     for line in pathFile:
         txtPath = line.split(' ')[0]
         xmlPath = line.split(' ')[1].replace("\n","")
         print(txtPath," ",xmlPath)
         #root = ET.parse('C:\\Users\\harviMa\\Desktop\\back-End\\data\\mathnew.txt.sol317.xml').getroot()
-        xmlPath = 'C:\\Users\\harviMa\\Desktop\\back-End\\data\\'+xmlPath
-        txtPath = 'C:\\Users\\harviMa\\Desktop\\back-End\\data\\'+txtPath
+        xmlPath = 'C:\\Users\\harviMa\\Desktop\\Github-Clone\\Courses-Schedule\\back-End\\data\\'+xmlPath
+        txtPath = 'C:\\Users\\harviMa\\Desktop\\Github-Clone\\Courses-Schedule\\back-End\\data\\'+txtPath
         root = ET.parse(xmlPath).getroot()
 
         courses = []

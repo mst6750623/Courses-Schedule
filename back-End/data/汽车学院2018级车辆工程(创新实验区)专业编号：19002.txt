@@ -1,19 +1,19 @@
-Name: 汽车学院2018级车辆工程(创新实验区)专业编号：19002
+Name: 2018-19002
 Courses: 6
 Rooms: 10
 Days: 5
 Periods_per_day: 6
-Curricula: 8
+Curricula: 3
 Constraints: 0
 
 COURSES: 
-course_name teacher_name num_of_lectures min_working_days(soft, less important) num_of_students
-19001501 05015 3 3 76 
-19001502 05230 3 3 75 
-19001503 01110 3 3 75 
-19013501 99044 2 2 10 
-19014001 09056 1 1 10 
-19017801 07131 2 2 10 
+// course_name teacher_name num_of_lectures min_working_days(soft, less important) num_of_students credit
+19001501 ['05015', '07121', '13073', '17012', '85065'] 3 3 76 5.0 
+19001502 ['05230', '06095', '09051'] 3 3 75 5.0 
+19001503 ['01110', '79361'] 3 3 75 5.0 
+19013501 ['99044'] 2 2 10 4.0 
+19014001 ['09056'] 1 1 10 2.0 
+19017801 ['07131'] 2 2 10 4.0 
 
 ROOMS: 
 room_name room_capacity
@@ -28,17 +28,12 @@ room9 150
 room10 100
 
 CURRICULA: 
-curricula_name num_of_courses_per_curricula n_courses for a group that cannot be set on the same time 
-q0 2 19001501 19001502 
-q1 2 19001501 19001503 
-q2 4 19001502 19013501 19014001 19017801 
-q3 6 19001501 19001502 19001503 19013501 19014001 19017801 
-q4 3 19001501 19001503 19017801 
-q5 2 19001502 19017801 
-q6 2 19013501 19014001 
-q7 3 19001501 19001502 19014001 
+// curricula_name num_of_courses_per_curricula n_courses for a group that cannot be set on the same time 
+q0 2 ['19001501', '19001502'] 
+q1 2 ['19001501', '19001503'] 
+q2 4 ['19001502', '19013501', '19014001', '19017801'] 
 
 UNAVAILABILITY_CONSTRAINTS: 
-course_name day period day_and_period pair for teacher's unavailability 
+// course_name day period day_and_period pair for teacher's unavailability 
 
 END.

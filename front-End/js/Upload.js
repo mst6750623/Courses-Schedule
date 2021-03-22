@@ -47,7 +47,7 @@ var app = new Vue({
                     // Vue.set(pre.courseResult,data);
                     pre.courseResult1 = data.class1;
                     pre.courseResult2 = data.class2;
-                    console.log('data', data);
+                    //console.log('data', data);
                     console.log('result', pre.courseResult1, 'result2', pre.courseResult2);
                     resultTOMiddle();
                     //console.log(pre.coursesData);
@@ -64,7 +64,7 @@ var app = new Vue({
             add_loader();
             $.ajax({
                 type: 'GET',
-                url: 'http://localhost:5002/auto/api',
+                url: '/auto/api',
                 //data: JSON.stringify(data),
                 //contentType: "application/json",
                 //dataType: "json",
@@ -89,9 +89,9 @@ var app = new Vue({
                             auto.middleCourseResult[row][col] = content;
                         }
                         Vue.set(auto.courseResultAll, arr[i], auto.middleCourseResult);
-                        localStorage.setItem(arr[i],JSON.stringify(auto.middleCourseResult));
+                        sessionStorage.setItem(arr[i],JSON.stringify(auto.middleCourseResult));
                     }
-                    localStorage.setItem("major-types", JSON.stringify(auto.types));
+                    sessionStorage.setItem("major-types", JSON.stringify(auto.types));
                     var nowArr = auto.courseResultAll[arr[0]];
                     auto.courseResultNow = nowArr;
                     auto.type = arr[0];
@@ -132,12 +132,19 @@ function resultTOMiddle() {
         var row = i % 5;
         var col = parseInt(i / 5);
         pre.middleCourseResult1[row][col] = pre.courseResult1[i];
+        sessionStorage.setItem("class1-result",pre.middleCourseResult1);
     }
+    
     for (var i = 0; i < pre.courseResult2.length; i++) {
         var row = i % 5;
         var col = parseInt(i / 5);
         pre.middleCourseResult2[row][col] = pre.courseResult2[i];
+        sessionStorage.setItem("class2-result",pre.middleCourseResult2);
     }
+    if(pre.class_choose == "班级1")
+        pre.middleCourseResult = pre.middleCourseResult1;
+    else
+        pre.middleCourseResult = pre.middleCourseResult2;
 }
 
 

@@ -249,12 +249,12 @@
                 <div id="manualResults" class="main-content pre">
                     <div class="row">
                         <div class="col-lg-8 offset-4 col-md-6">
-                            <div class="btn-group class-select" data-toggle="buttons">
-                                <label class="btn btn-md btn-info">
-                                    <input type="radio" name="classes" class="classes" value="class1" checked> 班级1
+                            <div class="btn-group class-select">
+                                <label class="btn btn-md btn-info" >
+                                    <input type="radio" name="classes" v-model="class_choose" class="classes" value="班级1" @change="classChange"> 班级1
                                 </label>
-                                <label class="btn btn-md btn-info">
-                                    <input type="radio" name="classes" class="classes" value="class2"> 班级2
+                                <label class="btn btn-md btn-info" >
+                                    <input type="radio" name="classes" v-model="class_choose" class="classes" value="班级2" @change="classChange"> 班级2
                                 </label>
 
                             </div>
@@ -277,18 +277,8 @@
                                     </tr>
                                 </thead>
                                 <tbody class="result-body">
-                                    <tr class="result-subbody" v-show="is_class1" id="class1"
-                                        v-for='(course,index) in middleCourseResult1'>
-                                        <th scope="row">第{{(index+1)*2-1}}-{{(index+1)*2}}节课</td>
-                                        <td v-for='detail in course'>
-                                            {{detail.id}}
-                                            <br><span class="result-name">{{detail.name}}</span>
-                                            <br><span class="result-score">score:{{detail.score}}</span>
-                                        </td>
-
-                                    </tr>
-                                    <tr class="result-subbody" v-show="!is_class1" id="class2"
-                                        v-for='(course,index) in middleCourseResult2'>
+                                    <tr class="result-subbody" id="class1"
+                                        v-for='(course,index) in middleCourseResult'>
                                         <th scope="row">第{{(index+1)*2-1}}-{{(index+1)*2}}节课</td>
                                         <td v-for='detail in course'>
                                             {{detail.id}}

@@ -12,12 +12,13 @@ import matplotlib.pyplot as plt
 from flask import Flask, jsonify, Response
 from flask import request
 from flask import abort
+from flask_cors import *
 
 
 
 #由Flask创建socket服务端
 app = Flask(__name__)
-
+CORS(app, resources=r'/*')
 #离散程度函数
 def F_discrete(Course_Hour, pop, POP_SIZE, Course_Amount):
     #创建一个长度为种群数量的空数组

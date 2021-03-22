@@ -75,12 +75,12 @@ var auto = new Vue({
     },
     mounted: function () {
 
-        if (localStorage.getItem("major-types") != null) {
-            this.types = JSON.parse(localStorage.getItem("major-types"));
+        if (sessionStorage.getItem("major-types") != null) {
+            this.types = JSON.parse(sessionStorage.getItem("major-types"));
             for (var i = 0; i< this.types.length;i++) {
                 var type = this.types[i];
-                if (localStorage.getItem(type)) {
-                    var temp_course = JSON.parse(localStorage.getItem(type));
+                if (sessionStorage.getItem(type)) {
+                    var temp_course = JSON.parse(sessionStorage.getItem(type));
                     Vue.set(this.courseResultAll, type, temp_course);
                 } else {
                     Vue.set(this.courseResultAll, type, "");

@@ -4,9 +4,9 @@ var pre = new Vue({
         title: "",
         courseId: "",
         courseName: "",
-        courseScore: "",
-        courseNum: "",
-        is_class1: true,
+        courseScore: 0,
+        courseNum: 0,
+        class_choose: "班级1",
         coursesData: [
 
         ],
@@ -24,22 +24,23 @@ var pre = new Vue({
         ],
         middleCourseResult1: new Array(),
         middleCourseResult2: new Array(),
+        middleCourseResult: new Array()
     },
     methods: {
-       
+
         addCourse: function () {
-            console.log('page1-coursedata', this.coursesData);
+            //console.log('page1-coursedata', this.coursesData);
             this.coursesData.push({
                 id: this.courseId,
                 name: this.courseName,
-                score: this.courseScore,
-                num: this.courseNum
+                score: parseInt(this.courseScore),
+                num: parseInt(this.courseNum)
             });
             this.finalCourseId.push(this.courseId);
             this.courseId = "";
             this.courseName = "";
-            this.courseScore = "";
-            this.courseNum = "";
+            this.courseScore = 0;
+            this.courseNum = 0;
         },
         removeCourse: function (index) {
             //console.log(index);
@@ -48,7 +49,7 @@ var pre = new Vue({
         },
         saveCourse: function () {
 
-            console.log('page1-coursedata2', JSON.stringify(this.coursesData))
+            //console.log('page1-coursedata2', JSON.stringify(this.coursesData))
             for (var i = 0; i < this.coursesData.length; i++) {
                 var a = this.coursesData[i];
                 var id = a.id;
@@ -56,13 +57,13 @@ var pre = new Vue({
                 var score = a.score;
                 var num = a.num;
                 var joins = name + '&' + score + '&' + num;
-                console.log('page1-joins', joins);
+                //console.log('page1-joins', joins);
                 sessionStorage.setItem(id, joins);
-                console.log(sessionStorage.getItem("dat2"));
+                //console.log(sessionStorage.getItem("dat2"));
             }
             sessionStorage.removeItem("courseids");
             var courseids = this.finalCourseId.join('-');
-            console.log("page1-courseids", courseids);
+            //console.log("page1-courseids", courseids);
             sessionStorage.setItem("courseids", courseids);
             alert("保存信息成功！");
 
@@ -80,7 +81,7 @@ var pre = new Vue({
             body.insertBefore(login_div, body.childNodes[0]);
             body.insertBefore(blocker, body.childNodes[0]);
             $('html,body').css('overflow', 'hidden')
-            $(".login_close").click(function(){
+            $(".login_close").click(function () {
                 login_complete(false);
             });
         },
@@ -88,12 +89,12 @@ var pre = new Vue({
             var classes = sessionStorage.getItem("classId").split(',');
             for (var i = 0; i < classes.length; i++) {
                 var className = name;
-                console.log(className, classes[i]);
+                //console.log(className, classes[i]);
                 if (classes[i] == className) {
                     classes.splice(i, 1);
                     //this.classData.splice(i, 1);
-                    Vue.delete(this.classData,className);
-                    console.log(this.classData);
+                    Vue.delete(this.classData, className);
+                    //console.log(this.classData);
                     sessionStorage.removeItem(className);
                 }
             }
@@ -105,12 +106,19 @@ var pre = new Vue({
             //location.reload();
             update("classInfo");
         },
-        
+        classChange: function () {
+            if (this.class_choose == "班级1") {
+                this.middleCourseResult = this.middleCourseResult1;
+            } else {
+                this.middleCourseResult = this.middleCourseResult2;
+            }
+            
+        },
 
     },
     created: function () {
         var ids = sessionStorage.getItem("courseids");
-        console.log("page1-ids", ids);
+        //console.log("page1-ids", ids);
         if (ids != '' && ids != null) {
             ids = ids.split("-");
             for (var i = 0; i < ids.length; i++) {
@@ -119,8 +127,8 @@ var pre = new Vue({
                 this.coursesData.push({
                     id: ids[i],
                     name: courseInfo[0],
-                    score: courseInfo[1],
-                    num: courseInfo[2]
+                    score: parseInt(courseInfo[1]),
+                    num: parseInt(courseInfo[2])
                 });
             }
         }
@@ -131,7 +139,7 @@ var pre = new Vue({
             for (var i = 0; i < classes.length; i++) {
                 var classCoursesTemp = [];
                 var courseList = sessionStorage.getItem(classes[i]);
-                console.log('page2-class', classes[i]);
+                //console.log('page2-class', classes[i]);
                 if (courseList != null && courseList != '') {
                     var courseLists = courseList.split('-');
                     for (var j = 0; j < courseLists.length; j++) {
@@ -155,6 +163,12 @@ var pre = new Vue({
                 //  favoriteColor: 'Vue Green'
                 // });// 方案二
             }
+        }
+        if (sessionStorage.getItem("class1-result") != null) {
+            this.middleCourseResult1 = JSON.parse(sessionStorage.getItem("class1-result"));
+        }
+        if (sessionStorage.getItem("class2-result") != null) {
+            this.middleCourseResult2 = JSON.parse(sessionStorage.getItem("class2-result"));
         }
     }
 

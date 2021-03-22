@@ -3,6 +3,7 @@ $(document).ready(function () {
     for (var i = 0; i < 6; i++) {
         pre.middleCourseResult1[i] = new Array();
         pre.middleCourseResult2[i] = new Array();
+        pre.middleCourseResult[i] = new Array();
         auto.middleCourseResult[i] = new Array();
         
         for (var j = 0; j < 7; j++) {
@@ -12,6 +13,11 @@ $(document).ready(function () {
                 score: ""
             };
             pre.middleCourseResult2[i][j] = {
+                id: "",
+                name: "",
+                score: ""
+            };
+            pre.middleCourseResult[i][j] = {
                 id: "",
                 name: "",
                 score: ""

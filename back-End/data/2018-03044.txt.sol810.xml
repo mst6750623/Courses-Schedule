@@ -1,0 +1,23 @@
+<solution submodelCost='0' cost='810' data='2018-03044.txt' type='FixPeriod' discovered='2' neighbourhoodLB='0' penaltyRoomCapacity='0' penaltyMinCourseDays='6' penaltyCompactness='390' penaltyRoomStability='0' >
+    <session course='02024101' room='room1' period='0' day='0' periodWithin='0'/>
+    <session course='03035701' room='room6' period='9' day='1' periodWithin='3'/>
+    <session course='03035801' room='room9' period='23' day='3' periodWithin='5'/>
+    <session course='03036301' room='room1' period='11' day='1' periodWithin='5'/>
+    <session course='03036301' room='room1' period='24' day='4' periodWithin='0'/>
+    <session course='03501501' room='room9' period='2' day='0' periodWithin='2'/>
+    <session course='03501501' room='room9' period='6' day='1' periodWithin='0'/>
+    <session course='57000201' room='room9' period='7' day='1' periodWithin='1'/>
+    <session course='57000201' room='room9' period='28' day='4' periodWithin='4'/>
+    <session course='57000202' room='room9' period='5' day='0' periodWithin='5'/>
+    <session course='57000202' room='room9' period='29' day='4' periodWithin='5'/>
+    <session course='57000701' room='room8' period='25' day='4' periodWithin='1'/>
+    <session course='57003101' room='room2' period='27' day='4' periodWithin='3'/>
+    <session course='57003102' room='room5' period='15' day='2' periodWithin='3'/>
+    <session course='57003501' room='room5' period='19' day='3' periodWithin='1'/>
+    <session course='57003601' room='room10' period='14' day='2' periodWithin='2'/>
+    <session course='57005401' room='room9' period='11' day='1' periodWithin='5'/>
+    <session course='57005401' room='room9' period='24' day='4' periodWithin='0'/>
+    <session course='57005402' room='room9' period='13' day='2' periodWithin='1'/>
+    <session course='57005402' room='room9' period='26' day='4' periodWithin='2'/>
+    <session course='57005701' room='room5' period='16' day='2' periodWithin='4'/>
+</solution>
