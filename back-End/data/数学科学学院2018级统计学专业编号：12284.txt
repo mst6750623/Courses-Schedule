@@ -1,4 +1,4 @@
-Name: 2018-12284
+Name: 数学科学学院2018级统计学专业编号：12284
 Courses: 13
 Rooms: 10
 Days: 5
@@ -23,12 +23,13 @@ COURSES:
 12230301 ['02017'] 2 2 80 3.0 
 
 ROOMS: 
-room_name room_capacity
+// room_name room_capacity
 room1 150
 room2 50
 room3 60
+room4 100
 room5 100
-room6 150
+room6 100
 room7 60
 room8 100
 room9 150
@@ -38,8 +39,8 @@ CURRICULA:
 // curricula_name num_of_courses_per_curricula n_courses for a group that cannot be set on the same time 
 q0 2 ['12228501', '12228502'] 
 q1 5 ['12208401', '12228001', '12228201', '12229801', '12230301'] 
-q2 3 [['12208401', '12228201', '12230301'], ['12208401', '12228201', '12230301'], ['12208401', '12228201', '12230301']] 
-q3 2 [['12228001', '12229801'], ['12228001', '12229801']] 
+q2 3 ['12208401', '12228201', '12230301'] 
+q3 2 ['12228001', '12229801'] 
 
 UNAVAILABILITY_CONSTRAINTS: 
 // course_name day period day_and_period pair for teacher's unavailability 

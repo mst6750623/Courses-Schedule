@@ -67,7 +67,7 @@ var auto = new Vue({
         chooseMajor: function (event) {
 
             var type = event.currentTarget.innerText;
-            console.log(auto.types);
+            console.log(type);
             auto.type = type;
             var nowArr = auto.courseResultAll[type];
             auto.courseResultNow = nowArr;

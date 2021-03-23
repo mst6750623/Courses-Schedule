@@ -1,4 +1,4 @@
-Name: 2018-12234
+Name: 数学科学学院2018级数学与应用数学专业编号：12234
 Courses: 8
 Rooms: 10
 Days: 5
@@ -18,12 +18,13 @@ COURSES:
 12228601 ['14123'] 2 2 110 3.0 
 
 ROOMS: 
-room_name room_capacity
+// room_name room_capacity
 room1 150
 room2 50
 room3 60
+room4 100
 room5 100
-room6 150
+room6 100
 room7 60
 room8 100
 room9 150

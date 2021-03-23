@@ -26,7 +26,7 @@ app = Flask(__name__)
 #CORS(app, supports_credentials=True)
 
 CORS(app, resources=r'/*')
-#@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def home():
     fname = "C:\\Users\\harviMa\\Desktop\\back-End\\data\\mathnew.txt.sol317.xml"
     with open(fname, 'r', encoding='utf-8') as fin:
@@ -41,7 +41,8 @@ def constraint(courses_arrangement, curricula):
     for curriculum in curricula:
         timetable = np.zeros(30)
         for course in curriculum:
-            timetable += courses_arrangement[course]
+            if course in courses_arrangement:
+                timetable += courses_arrangement[course]
         if any(timetable > 1):
             success = 0
     if success == 0:
@@ -244,6 +245,7 @@ def main():
             Curriculum = s.split()
             Curricula_num = int(Curriculum[1])
             s = fin.readline()
+
             Constraints = s.split()
             Constraint_num = int(Constraints[1])
             lecture_teacher = {}
@@ -252,6 +254,7 @@ def main():
             for i in range(Course_num):
                 s = fin.readline()
                 tmp = s.split()
+                print("tmp: ", tmp)
                 lecture_teacher[tmp[0]] = tmp[1][2:7]
                 num_of_lectures.append(int(tmp[2]))
                 num_of_students.append(int(tmp[4]))
@@ -268,7 +271,9 @@ def main():
             for i in range(Curricula_num):
                 s = fin.readline()
                 tmp = s.split(' ', 2)
-                tmplist = tmp[2][2:-4].split("', '")
+                tmplist = tmp[2][2:-4]
+                print("tmplist:", tmplist)
+                tmplist = tmplist.split("', '")
                 curricula.append(tmplist)
             for i in range(3):
                 fin.readline()
@@ -401,7 +406,6 @@ def main():
     data = json.dumps(json_dict)
     pathFile.close()
     return data, 200, {"ContentType": "application/json"}
-
 
 if __name__ == "__main__":
     app.run(

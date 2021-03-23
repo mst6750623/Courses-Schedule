@@ -1,9 +1,9 @@
-Name: 2018-31002
+Name: 海洋与地球科学学院2018级海洋学(试验基地班)专业编号：31002
 Courses: 7
 Rooms: 10
 Days: 5
 Periods_per_day: 6
-Curricula: 1
+Curricula: 0
 Constraints: 0
 
 COURSES: 
@@ -17,20 +17,20 @@ COURSES:
 31018401 ['02037'] 1 1 16 2.0 
 
 ROOMS: 
-room_name room_capacity
+// room_name room_capacity
 room1 150
 room2 50
 room3 60
+room4 100
 room5 100
-room6 150
+room6 100
 room7 60
 room8 100
 room9 150
 room10 100
 
 CURRICULA: 
-// curricula_name num_of_courses_per_curricula n_courses for a group that cannot be set on the same time 
-q0 0 [] 
+// curricula_name num_of_courses_per_curricula n_courses for a group that cannot be set on the same time
 
 UNAVAILABILITY_CONSTRAINTS: 
 // course_name day period day_and_period pair for teacher's unavailability 
