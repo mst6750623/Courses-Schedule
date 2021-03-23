@@ -1,4 +1,46 @@
-<neighbourhood data='.\ÍÁÄ¾¹¤³ÌÑ§Ôº\2018-03064.txt' discovered='0' cost='58' penaltyCompactness='390' penaltyMinCourseDays='0' LB='0' '><definition>
-<session course='0'  day='1'  events='1'/><session course='1'  day='2'  events='1'/><session course='2'  day='4'  events='1'/><session course='3'  day='0'  events='1'/><session course='4'  day='2'  events='1'/><session course='5'  day='4'  events='1'/><session course='6'  day='2'  events='1'/><session course='7'  day='3'  events='1'/><session course='8'  day='3'  events='1'/><session course='9'  day='4'  events='1'/><session course='10'  day='2'  events='1'/><session course='11'  day='0'  events='1'/><session course='12'  day='0'  events='1'/><session course='13'  day='3'  events='1'/><session course='14'  day='1'  events='1'/><session course='15'  day='1'  events='1'/><session course='16'  day='2'  events='1'/><session course='17'  day='0'  events='1'/><session course='18'  day='3'  events='1'/><session course='19'  day='0'  events='1'/></definition></neighbourhood>
-<neighbourhood data='.\ÍÁÄ¾¹¤³ÌÑ§Ôº\2018-03064.txt' discovered='1' cost='58' penaltyCompactness='390' penaltyMinCourseDays='0' LB='0' '><definition>
-<session course='0'  day='4'  events='1'/><session course='1'  day='3'  events='1'/><session course='2'  day='2'  events='1'/><session course='3'  day='1'  events='1'/><session course='4'  day='0'  events='1'/><session course='5'  day='0'  events='1'/><session course='6'  day='2'  events='1'/><session course='7'  day='0'  events='1'/><session course='8'  day='1'  events='1'/><session course='9'  day='4'  events='1'/><session course='10'  day='4'  events='1'/><session course='11'  day='0'  events='1'/><session course='12'  day='3'  events='1'/><session course='13'  day='0'  events='1'/><session course='14'  day='1'  events='1'/><session course='15'  day='2'  events='1'/><session course='16'  day='2'  events='1'/><session course='17'  day='4'  events='1'/><session course='18'  day='3'  events='1'/><session course='19'  day='2'  events='1'/></definition></neighbourhood>
+<neighbourhood data='.\ï¿½ï¿½Ä¾ï¿½ï¿½ï¿½ï¿½Ñ§Ôº\2018-03064.txt' discovered='0' cost='58' penaltyCompactness='390' penaltyMinCourseDays='0' LB='0' '><definition>
+<session course='0' day='1' events='1'/>
+<session course='1' day='2' events='1'/>
+<session course='2' day='4' events='1'/>
+<session course='3' day='0' events='1'/>
+<session course='4' day='2' events='1'/>
+<session course='5' day='4' events='1'/>
+<session course='6' day='2' events='1'/>
+<session course='7' day='3' events='1'/>
+<session course='8' day='3' events='1'/>
+<session course='9' day='4' events='1'/>
+<session course='10' day='2' events='1'/>
+<session course='11' day='0' events='1'/>
+<session course='12' day='0' events='1'/>
+<session course='13' day='3' events='1'/>
+<session course='14' day='1' events='1'/>
+<session course='15' day='1' events='1'/>
+<session course='16' day='2' events='1'/>
+<session course='17' day='0' events='1'/>
+<session course='18' day='3' events='1'/>
+<session course='19' day='0' events='1'/>
+</definition>
+</neighbourhood>
+<neighbourhood data='.\ï¿½ï¿½Ä¾ï¿½ï¿½ï¿½ï¿½Ñ§Ôº\2018-03064.txt' discovered='1' cost='58' penaltyCompactness='390' penaltyMinCourseDays='0' LB='0' '><definition>
+<session course='0' day='4' events='1'/>
+<session course='1' day='3' events='1'/>
+<session course='2' day='2' events='1'/>
+<session course='3' day='1' events='1'/>
+<session course='4' day='0' events='1'/>
+<session course='5' day='0' events='1'/>
+<session course='6' day='2' events='1'/>
+<session course='7' day='0' events='1'/>
+<session course='8' day='1' events='1'/>
+<session course='9' day='4' events='1'/>
+<session course='10' day='4' events='1'/>
+<session course='11' day='0' events='1'/>
+<session course='12' day='3' events='1'/>
+<session course='13' day='0' events='1'/>
+<session course='14' day='1' events='1'/>
+<session course='15' day='2' events='1'/>
+<session course='16' day='2' events='1'/>
+<session course='17' day='4' events='1'/>
+<session course='18' day='3' events='1'/>
+<session course='19' day='2' events='1'/>
+</definition>
+</neighbourhood>

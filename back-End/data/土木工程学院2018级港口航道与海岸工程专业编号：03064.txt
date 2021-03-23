@@ -31,11 +31,11 @@ COURSES:
 
 ROOMS: 
 // room_name room_capacity
-room1 150
+room1 50
 room2 50
 room3 60
 room4 100
-room5 100
+room5 150
 room6 100
 room7 60
 room8 100

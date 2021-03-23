@@ -64,20 +64,28 @@ var app = new Vue({
             add_loader();
             $.ajax({
                 type: 'GET',
-                url: '/auto/api',
+                url: 'http://localhost:5002/auto/api',
                 //data: JSON.stringify(data),
                 //contentType: "application/json",
                 //dataType: "json",
                 success: function (data) {
+                    auto.types = [];
                     var result = JSON.parse(data);
                     var arr = Object.keys(result);
+                    console.log(result)
                     for (var i = 0; i < arr.length; i++) {
-                        console.log("arr[i]: " +  arr[i]);
                         var val = result[arr[i]];
                         arr[i] = arr[i].substring(0, arr[i].length - 1);
                         console.log("arr[i]: " +  arr[i]);
                         auto.types.push(arr[i]);
-                        console.log("types: " + auto.types);
+                        //初始化temp_course_result
+                        var temp_course_result = new Array();
+                        for (var a = 0; a < 6; a++) {
+                            temp_course_result[a] = new Array();  
+                            for (var b = 0; b < 7; b++) {
+                               temp_course_result[a][b] = "";        
+                            }
+                        }
                         for (var j = 0; j < val.length; j++) {
                             //[2]为period,[3]为day
                             var row = val[j][2];
@@ -85,17 +93,20 @@ var app = new Vue({
                             var content = {};
                             content["courseNum"] = val[j][0];
                             content["teacherNum"] = val[j][1];
-                            content["roomNum"] = val[j][4];
-                            auto.middleCourseResult[row][col] = content;
-                        }
-                        Vue.set(auto.courseResultAll, arr[i], auto.middleCourseResult);
-                        sessionStorage.setItem(arr[i],JSON.stringify(auto.middleCourseResult));
+                            content["roomNum"] = generateRoom(val[j][4]);
+                            content = JSON.stringify(content);
+                            temp_course_result[row][col] = JSON.parse(content);
+                        }      
+                        sessionStorage.setItem(arr[i],JSON.stringify(temp_course_result));
+                        Vue.set(auto.courseResultAll, arr[i], temp_course_result);
                     }
+
                     sessionStorage.setItem("major-types", JSON.stringify(auto.types));
                     var nowArr = auto.courseResultAll[arr[0]];
                     auto.courseResultNow = nowArr;
                     auto.type = arr[0];
                     remove_loader();
+                    //location.reload();
                 },
                 error: function () {
                     alert("自动排课出错，请重试");
@@ -168,4 +179,12 @@ function add_loader() {
 function remove_loader() {
     $('.new1').remove();
     $('html,body').css('overflow', '');
+}
+
+function generateRoom(roomNum){
+    if(roomNum == "Room1"){
+        var num = parseInt(Math.round(Math.random()*10)+1);
+        return "Room"+num;
+    }
+    return roomNum;
 }

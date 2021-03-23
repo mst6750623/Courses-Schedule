@@ -1,3 +1,17 @@
 <solution submodelCost='0' cost='505' data='.\2018-19002.txt' type='FixPeriod' discovered='1' neighbourhoodLB='0' penaltyRoomCapacity='0' penaltyMinCourseDays='5' penaltyCompactness='240' penaltyRoomStability='0' >
-<session course='19001501' room='room9' period='3' day='0' periodWithin='3'/> <session course='19001501' room='room9' period='4' day='0' periodWithin='4'/> <session course='19001501' room='room9' period='9' day='1' periodWithin='3'/> <session course='19001502' room='room9' period='0' day='0' periodWithin='0'/> <session course='19001502' room='room9' period='2' day='0' periodWithin='2'/> <session course='19001502' room='room9' period='8' day='1' periodWithin='2'/> <session course='19001503' room='room9' period='1' day='0' periodWithin='1'/> <session course='19001503' room='room9' period='14' day='2' periodWithin='2'/> <session course='19001503' room='room9' period='20' day='3' periodWithin='2'/> <session course='19013501' room='room9' period='16' day='2' periodWithin='4'/> <session course='19013501' room='room9' period='21' day='3' periodWithin='3'/> <session course='19014001' room='room9' period='10' day='1' periodWithin='4'/> <session course='19017801' room='room9' period='26' day='4' periodWithin='2'/> <session course='19017801' room='room9' period='27' day='4' periodWithin='3'/> </solution>
+    <session course='19001501' room='room9' period='3' day='0' periodWithin='3'/>
+    <session course='19001501' room='room9' period='4' day='0' periodWithin='4'/>
+    <session course='19001501' room='room9' period='9' day='1' periodWithin='3'/>
+    <session course='19001502' room='room9' period='0' day='0' periodWithin='0'/>
+    <session course='19001502' room='room9' period='2' day='0' periodWithin='2'/>
+    <session course='19001502' room='room9' period='8' day='1' periodWithin='2'/>
+    <session course='19001503' room='room9' period='1' day='0' periodWithin='1'/>
+    <session course='19001503' room='room9' period='14' day='2' periodWithin='2'/>
+    <session course='19001503' room='room9' period='20' day='3' periodWithin='2'/>
+    <session course='19013501' room='room9' period='16' day='2' periodWithin='4'/>
+    <session course='19013501' room='room9' period='21' day='3' periodWithin='3'/>
+    <session course='19014001' room='room9' period='10' day='1' periodWithin='4'/>
+    <session course='19017801' room='room9' period='26' day='4' periodWithin='2'/>
+    <session course='19017801' room='room9' period='27' day='4' periodWithin='3'/>
+</solution>
 
